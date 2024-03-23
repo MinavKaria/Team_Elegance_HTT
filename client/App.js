@@ -4,6 +4,7 @@ import { Image, Text, View } from 'react-native';
 import Budget from './components/Budget';
 import Home from './components/Home';
 import Login from './components/Login';
+import Maps from './components/Maps';
 import VerifyOTP from './components/VerifyOTP';
 const Stack = createStackNavigator();
 export default function App() {
@@ -46,6 +47,11 @@ export default function App() {
         <Stack.Screen
           name="VerifyOTP"
           component={VerifyOTP}
+          options={{ title: 'Verify OTP' }}
+        />
+        <Stack.Screen
+          name="Maps"
+          component={Maps}
           options={{ title: 'Verify OTP' }}
         />
      
