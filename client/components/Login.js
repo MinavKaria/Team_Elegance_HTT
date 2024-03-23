@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Button, Keyboard, StyleSheet, Text, TextInput, View } from 'react-native';
+import axios from 'axios';
+import qs from 'qs'; // Import qs library
 
 function Login() {
   const [number, setNumber] = useState('');
@@ -7,39 +9,36 @@ function Login() {
   const [message, setMessage] = useState('');
 
   const sendOTP = () => {
-    fetch('http://localhost:3000/sendOTP', {
-      method: 'POST',
+    const formData = qs.stringify({ number }); // Convert data to form-urlencoded format
+    axios.post('https://team-elegance-htt.vercel.app/sendOTP', formData, {
       headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ number: number }),
+        'Content-Type': 'application/x-www-form-urlencoded' // Set the correct Content-Type header
+      }
     })
-    .then(response => response.text())
-    .then(data => {
-      console.log(data);
-      setMessage(data);
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
+      .then(response => {
+        console.log(response.data);
+        Keyboard.dismiss();
+        setMessage(response.data);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
   };
 
   const verifyOTP = () => {
-    fetch('http://localhost:3000/verifyOTP', {
-      method: 'POST',
+    const formData = qs.stringify({ number, otpCode }); // Convert data to form-urlencoded format
+    axios.post('https://team-elegance-htt.vercel.app/verifyOTP', formData, {
       headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ number: number, otpCode: otpCode }),
+        'Content-Type': 'application/x-www-form-urlencoded' // Set the correct Content-Type header
+      }
     })
-    .then(response => response.text())
-    .then(data => {
-      console.log(data);
-      setMessage(data);
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
+      .then(response => {
+        console.log(response.data);
+        setMessage(response.data);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
   };
 
   return (
@@ -51,10 +50,7 @@ function Login() {
         onChangeText={text => setNumber(text)}
         value={number}
       />
-      <Button title="Send OTP" onPress={()=>{
-        console.log("sendOTP");
-        sendOTP();
-      }} />
+      <Button title="Send OTP" onPress={sendOTP} />
       <TextInput
         style={styles.input}
         placeholder="Enter OTP"

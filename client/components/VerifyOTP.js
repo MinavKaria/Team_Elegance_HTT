@@ -7,7 +7,7 @@ function OTPVerification({ navigation, route }) {
   const [message, setMessage] = useState('');
 
   const verifyOTP = () => {
-    // Your verifyOTP logic here
+    console.log("Verify OTP");
   };
 
   return (
