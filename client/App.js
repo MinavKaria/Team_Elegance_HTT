@@ -1,6 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, Text, View } from 'react-native';
+import Budget from './components/Budget';
 import Home from './components/Home';
 const Stack = createStackNavigator();
 export default function App() {
@@ -19,6 +20,11 @@ export default function App() {
               </View>
               
               ),}} component={Home} />
+         <Stack.Screen 
+          name="Budget" 
+          component={Budget} 
+          options={{ title: 'Another Component' }} 
+        />
      
     </Stack.Navigator>
   </NavigationContainer>

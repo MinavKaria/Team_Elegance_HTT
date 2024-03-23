@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-export default function Home() {
+export default function Home({navigation}) {
   return (
     <View style={{ flex: 1 }}>
         <View style={{ flex: 1}}></View>
@@ -51,7 +51,7 @@ export default function Home() {
             opacity: 0.8, 
             width: '100%' 
           }}
-          onPress={() => console.log('Right button pressed')}
+          onPress={() =>navigation.navigate('Budget')}
         >
           <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>SIGN UP</Text>
         </TouchableOpacity>
