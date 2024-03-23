@@ -3,6 +3,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { Image, Text, View } from 'react-native';
 import Budget from './components/Budget';
 import Home from './components/Home';
+import Login from './components/Login';
+import VerifyOTP from './components/VerifyOTP';
 const Stack = createStackNavigator();
 export default function App() {
   return (
@@ -24,6 +26,16 @@ export default function App() {
           name="Budget" 
           component={Budget} 
           options={{ title: 'Another Component' }} 
+        />
+         <Stack.Screen 
+          name="Login" 
+          component={Login} 
+          options={{ title: 'Login' }} 
+        />
+        <Stack.Screen
+          name="VerifyOTP"
+          component={VerifyOTP}
+          options={{ title: 'Verify OTP' }}
         />
      
     </Stack.Navigator>

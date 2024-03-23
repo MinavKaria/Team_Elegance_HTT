@@ -1,26 +1,29 @@
+// OTPVerification.js
 import React, { useState } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
-function Login({ navigation }) {
-  const [number, setNumber] = useState('');
+function OTPVerification({ navigation, route }) {
+  const [otpCode, setOtpCode] = useState('');
+  const [message, setMessage] = useState('');
 
-  const sendOTP = () => {
-    navigation.navigate('VerifyOTP', { number });
+  const verifyOTP = () => {
+    // Your verifyOTP logic here
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Login Page</Text>
+      <Text style={styles.title}>OTP Verification</Text>
       <TextInput
         style={styles.input}
-        placeholder="Enter your phone number"
-        onChangeText={text => setNumber(text)}
-        value={number}
-        keyboardType="phone-pad"
+        placeholder="Enter OTP"
+        onChangeText={text => setOtpCode(text)}
+        value={otpCode}
+        keyboardType="numeric"
       />
-      <TouchableOpacity style={styles.button} onPress={sendOTP}>
-        <Text style={styles.buttonText}>Send OTP</Text>
+      <TouchableOpacity style={styles.button} onPress={verifyOTP}>
+        <Text style={styles.buttonText}>Verify OTP</Text>
       </TouchableOpacity>
+      <Text style={styles.message}>{message}</Text>
     </View>
   );
 }
@@ -59,6 +62,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
+  message: {
+    marginTop: 20,
+    fontSize: 16,
+    color: '#007bff',
+  },
 });
 
-export default Login;
+export default OTPVerification;
