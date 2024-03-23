@@ -1,6 +1,5 @@
 import React from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View, Animated } from 'react-native';
-import { useRef, useEffect } from 'react';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 
 export default function Home({navigation}) {
@@ -14,7 +13,7 @@ export default function Home({navigation}) {
               />
         </View>
         <View>
-            <Image source={require('../assets/images/Rectangle 1wave.png')} style={{width:"100%"}}/>
+            <Image source={require('../assets/images/Rectangle 1wave.png')} style={{width:"100%" , objectFit: 'cover'}}/>
            
             <View style={{
         position: 'absolute',
@@ -34,7 +33,7 @@ export default function Home({navigation}) {
       <View style={{ width: "100%" }}>
         <TouchableOpacity
           style={{ 
-            backgroundColor: '#0F1730', 
+            backgroundColor: 'black', 
             height: 40, 
             borderRadius: 5, 
             justifyContent: 'center', 

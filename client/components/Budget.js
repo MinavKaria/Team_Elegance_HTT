@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Button, TextInput, Switch, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { Button, Keyboard, KeyboardAvoidingView, StyleSheet, Switch, Text, TextInput, TouchableWithoutFeedback, View } from 'react-native';
 import Navbar from './Navbar';
 
 const ZorkoPage = ({ navigation }) => {

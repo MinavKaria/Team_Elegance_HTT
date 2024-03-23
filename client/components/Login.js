@@ -1,15 +1,17 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from "axios";
+import qs from "qs"; // Import qs library
 import React, { useState } from "react";
+
 import {
-  Button,
+  Image,
   Keyboard,
   StyleSheet,
   Text,
   TextInput,
-  View,
+  TouchableOpacity,
+  View
 } from "react-native";
-import axios from "axios";
-import qs from "qs"; // Import qs library
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function Login({ navigation }) {
   const [number, setNumber] = useState("");
@@ -63,17 +65,39 @@ function Login({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text>Login Page</Text>
+    <View style={{width: "100%", height: "50%", position: "absolute",top:0, display: "flex", flexDirection:"column", alignContent:"center",  alignItems:"center", borderColor:"black"}}>
+      <Image  source={require('../assets/images/otp.png')} style={{width:"97%" , height:"97%", borderRadius: 5}}/>
+    </View>
+    <View style={{width: "100%", display: "flex"}}>
+    <View style={{width:"100%", height: "50%", position: "absolute", bottom:5, display: "flex", flexDirection:"column", alignContent:"center",  alignItems:"center"}}>
       <TextInput
         style={styles.input}
         placeholder="Enter your phone number"
         onChangeText={(text) => setNumber(text)}
         value={number}
+        keyboardType="numeric"
       />
-      <Button title="Send OTP" onPress={()=>{
+      <TouchableOpacity title="Send OTP" onPress={()=>{
         sendOTP();
-        navigation.navigate('QuestionPage1');
-      }} />
+        navigation.navigate('QuestionPage1');}} 
+        style={{ 
+            backgroundColor: 'black', 
+            height: 40, 
+            borderRadius: 5, 
+            justifyContent: 'center', 
+            alignItems: 'center', 
+            marginBottom: 10, 
+            opacity: 0.8, 
+            width: '70%', 
+            color: 'white'
+            
+
+          }}
+
+        >
+          <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>SEND OTP</Text>
+        </TouchableOpacity>
+        
       {NumberEntered && (
         <>
           <TextInput
@@ -82,10 +106,31 @@ function Login({ navigation }) {
             onChangeText={(text) => setOtpCode(text)}
             value={otpCode}
           />
-          <Button title="Verify OTP" onPress={verifyOTP} />
+          <TouchableOpacity title="Send OTP" onPress={()=>{
+        sendOTP();
+        navigation.navigate('QuestionPage1');}} 
+        style={{ 
+          backgroundColor: 'black',  
+            height: 40, 
+            borderRadius: 5, 
+            justifyContent: 'center', 
+            alignItems: 'center', 
+            marginBottom: 10, 
+            opacity: 0.8, 
+            width: '70%', 
+            color: 'white'
+            
+
+          }}
+
+        >
+          <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>SEND OTP</Text>
+        </TouchableOpacity>
           <Text>{message}</Text>
         </>
       )}
+      </View>
+      </View>
     </View>
   );
 }
@@ -95,6 +140,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "",
+    position: "relative"
   },
   input: {
     height: 40,
