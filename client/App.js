@@ -1,16 +1,16 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { StyleSheet } from 'react-native';
+import Home from './components/Home';
+const Stack = createStackNavigator();
 export default function App() {
   return (
-    <View style={{ flex: 1, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
-      <View>
-        <Text style={{ color: 'black', fontSize: 22, fontWeight:900, right: '35%', bottom:'1100%'}}>ZORKO</Text>
-      </View>
-      <View>
-        <Text style={{color:'black', fontWeight:'bold', fontSize:40}}>Control your <Text style={{color:'#FF8E5E'}}>Budget</Text> stress-free</Text>
-      </View>
-    </View>
+    <NavigationContainer>
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={Home} />
+     
+    </Stack.Navigator>
+  </NavigationContainer>
   );
 }
 
