@@ -1,14 +1,13 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Image, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import Budget from './components/Budget';
+import Home from './components/Home';
 import Landing from './components/Landing';
 import Login from './components/Login';
 import Maps from './components/Maps';
-import VerifyOTP from './components/VerifyOTP';
 import QuestionPage1 from './components/QuestionPage1';
-import { AppStateContext } from './components/Provider';
-import Home from './components/Home';
+import VerifyOTP from './components/VerifyOTP';
 const Stack = createStackNavigator();
 export default function App() {
   return (
@@ -47,7 +46,7 @@ export default function App() {
         <Stack.Screen
           name="QuestionPage1"
           component={QuestionPage1}
-          options={{ title: 'Question Page 1' }}
+          options={{ title: 'Details' }}
         />
         <Stack.Screen
           name="Home"
