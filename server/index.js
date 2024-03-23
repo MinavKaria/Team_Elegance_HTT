@@ -6,6 +6,7 @@ import twilio from 'twilio';
 
 import mongoose from 'mongoose';
 import User from './userSchema.js';
+import Zorko from './zorkoSchema.js';
 const PORT= 3000;
 const app = express();
 
@@ -110,6 +111,7 @@ app.get('/getUsers', async (req, res) => {
 
 app.post('/addUser',(req,res)=>{
     const {name,age,email,recommendation,phone}=req.body;
+    console.log(name,age,email,recommendation,phone);
     const user=new User({name,age,email,recommendation,phone});
     user.save().then(()=>{
         res.send("User added successfully");
@@ -132,21 +134,27 @@ app.get('/getUserRecommendations', async (req, res) => {
     }
 });
 
-app.post('/addMenu', async(req,res)=>{
+app.post("/postMenu",(req,res)=>{
+    const {food,price,people,upvote,downvote,location,date}=req.body;
+    const zorko=new Zorko({food,price,people,upvote,downvote,location,date});
+    zorko.save().then(()=>{
+        res.send("Menu added successfully");
+    }).catch((error)=>{
+        console.error("Error adding menu:",error);
+        res.status(500).send("An error occurred while adding menu");
+    });
+});
+
+app.get('/getMenu', async (req, res) => {
     try {
-        // Create a new Zorko instance using the data from the request body
-        const { food, price } = req.body;
-        const newZorko = new Zorko({ food, price });
-    
-        // Save the new Zorko instance to the database
-        const savedZorko = await newZorko.save();
-    
-        res.status(201).json(savedZorko);
-      } catch (error) {
-        console.error('Error saving Zorko:', error);
-        res.status(500).json({ error: 'Internal server error' });
-      }
-})
+        const collection = db.collection('menu');
+        const menu = await collection.find({}).toArray();
+        res.send(menu);
+    } catch (error) {
+        console.error("Error fetching menu:", error);
+        res.status(500).send("An error occurred while fetching menu");
+    }
+});
 
 
 app.listen(PORT, () => {
