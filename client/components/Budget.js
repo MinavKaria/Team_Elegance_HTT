@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Keyboard, KeyboardAvoidingView, StyleSheet, Switch, Text, TextInput, TouchableWithoutFeedback, View } from 'react-native';
+import { Keyboard, KeyboardAvoidingView, StyleSheet, Switch, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
 import Navbar from './Navbar';
 
 const ZorkoPage = ({ navigation }) => {
@@ -10,9 +10,9 @@ const ZorkoPage = ({ navigation }) => {
 
   const handleBudgetChange = (text) => {
     // Limiting input to accept only numeric values
-    if (/^\d*$/.test(text)) {
-      setBudget(text);
-    }
+    // if (/^\d*$/.test(text)) {
+    //   setBudget(text);
+    // }
   };
 
   return (
@@ -25,12 +25,12 @@ const ZorkoPage = ({ navigation }) => {
           <TextInput
             style={styles.input}
             placeholder="Enter your budget"
-            onChangeText={()=>{
-              setBudget(budget.toString())
-            }}
-            value={budget.toString()}
+            
             keyboardType="numeric"
-            maxLength={5} // Limiting input to 5 characters
+            maxLength={5}
+          
+            
+
           />
           {budget && <Text style={{ padding: 12,color:'white' }}>Selected budget: {budget}</Text>}
           <View style={styles.partyFoodContainer}>
@@ -46,7 +46,7 @@ const ZorkoPage = ({ navigation }) => {
           {partyFood && (
             <>
               <View style={{width:"100%"}}>
-                <Text style={{ color: '#FF8E5E' }}>Party food budget</Text>
+                
                 <TextInput
                   style={styles.input}
                   placeholder="Enter your budget"
@@ -58,7 +58,7 @@ const ZorkoPage = ({ navigation }) => {
                   keyboardType="numeric"
                   maxLength={5} 
                 />
-                <Text style={{ color: '#FF8E5E' }}>Number of people</Text>
+                
                 <TextInput
                   style={styles.input}
                   placeholder="Enter number of people"
@@ -69,21 +69,35 @@ const ZorkoPage = ({ navigation }) => {
                   value={partyPeople}
                   keyboardType="numeric"
                   maxLength={5} 
+                  
                 />
               </View>
             </>
           )}
-          <View style={styles.buttonContainer}>
-            <Button
-              title="Submit"
-              onPress={() => {
-                navigation.navigate('Maps');
-              }}
-              disabled={!budget} 
-              color="#FF8E5E"
-            />
-          </View>
-          <Navbar/>
+          <View style={{ width: "100%" }}>
+        <TouchableOpacity
+          style={{ 
+            backgroundColor: 'black', 
+            height: 40, 
+            borderRadius: 5, 
+            justifyContent: 'center', 
+            alignItems: 'center', 
+            marginBottom: 10, 
+            opacity: 0.8, 
+            width: '100%', 
+            
+
+          }}
+          onPress={() => {
+            console.log('Login');
+            navigation.navigate('Cart');
+          }}
+        >
+          <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>SUBMIT</Text>
+        </TouchableOpacity>
+          
+        </View>
+        <Navbar/>
         </View>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
@@ -93,27 +107,28 @@ const ZorkoPage = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    // justifyContent: 'center',
+     alignItems: 'center',
     padding: 12,
-    backgroundColor: '#000000', // Black background color
+    backgroundColor: 'white', // Black background color
   },
   title: {
     fontSize: 30,
     fontWeight: 'bold',
     marginBottom: 24,
     textAlign: 'center',
-    color: '#FFFFFF', // White text color
+    color: 'black', // White text color
   },
   input: {
     borderWidth: 1,
-    borderColor: '#FF8E5E', // Orange border color
+    borderColor: 'black', // Orange border color
     borderRadius: 5,
     padding: 10,
     marginBottom: 20,
     width: '100%',
     backgroundColor: '#FFFFFF', // White background color
     color: '#000000', // Black text color
+    borderWidth: 1.5
   },
   partyFoodContainer: {
     flexDirection: 'row',
@@ -121,8 +136,13 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   buttonContainer: {
-    width: '100%',
+    width: '70%',
     marginTop: 20,
+    display: 'flex',
+    alignContent: 'center',
+    justifyContent: 'center',
+    
+    justifyItems: 'center'
   },
 });
 

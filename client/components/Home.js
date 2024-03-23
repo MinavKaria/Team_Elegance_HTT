@@ -1,7 +1,7 @@
+import { FontAwesome5 } from '@expo/vector-icons'; // Import the icon component
 import React, { useState } from 'react';
-import { View, Text, FlatList, StyleSheet, TouchableOpacity, Image, Button } from 'react-native';
-import Navbar from './Navbar'
-
+import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import Navbar from './Navbar';
 
 const menuData = [
   { id: 1, name: 'Pizza', price: '$10', image: require('../assets/advertisement.jpg') },
@@ -10,13 +10,25 @@ const menuData = [
   // Add more items as needed
 ];
 
-const FoodMenuPage = ({navigation}) => {
+const FoodMenuPage = ({ navigation }) => {
   const [cartItems, setCartItems] = useState({});
+  const [addedItem, setAddedItem] = useState(null); // State to store the added item
 
   const addToCart = (item) => {
     const updatedCart = { ...cartItems };
     updatedCart[item.id] = (updatedCart[item.id] || 0) + 1;
     setCartItems(updatedCart);
+    setAddedItem(item); // Update the addedItem state
+    console.log(cartItems);
+  };
+
+  const removeFromCart = (item) => {
+    const updatedCart = { ...cartItems };
+    if (updatedCart[item.id] > 0) {
+      updatedCart[item.id] -= 1;
+      setCartItems(updatedCart);
+      console.log(cartItems);
+    }
   };
 
   const renderItem = ({ item }) => (
@@ -26,16 +38,19 @@ const FoodMenuPage = ({navigation}) => {
         <Text style={styles.itemName}>{item.name}</Text>
         <Text style={styles.itemPrice}>{item.price}</Text>
       </View>
-      {cartItems[item.id] > 0 && (
-        <TouchableOpacity style={styles.addButton} onPress={() => addToCart(item)}>
-          <Text style={styles.addButtonText}>{`+${cartItems[item.id]}`}</Text>
+      <View style={styles.quantityContainer}>
+        <TouchableOpacity style={styles.quantityButton} onPress={() => removeFromCart(item)}>
+          <Text style={styles.quantityButtonText}>-</Text>
         </TouchableOpacity>
-      )}
-      {cartItems[item.id] === undefined && (
-        <TouchableOpacity style={styles.addButton} onPress={() => addToCart(item)}>
-          <Text style={styles.addButtonText}>Add to Cart</Text>
+        <Text style={styles.quantity}>{cartItems[item.id] || 0}</Text>
+        <TouchableOpacity style={styles.quantityButton} onPress={() => addToCart(item)}>
+          <Text style={styles.quantityButtonText}>+</Text>
         </TouchableOpacity>
-      )}
+      </View>
+      <Text>
+      {addedItem && addedItem.id === item.id && <FontAwesome5 name="check-circle" size={24} color="green" />} {/* Display check icon for added item */}
+      
+        </Text>
     </View>
   );
 
@@ -47,15 +62,19 @@ const FoodMenuPage = ({navigation}) => {
         renderItem={renderItem}
         keyExtractor={(item) => item.id.toString()}
       />
-       <Button
-        title="Submit"
-        onPress={()=>{
-            navigation.navigate('Maps');
-        }}
-        color="#841584"
-        style={{ width: '100%'}}
-      />
-      <Navbar/>
+     
+        <View style={{position: 'absolute', bottom: 150, width: "100%", alignSelf:"center", height:40}}>
+      {/* Display cart items if cartItems is not null */}
+     
+
+      {/* TouchableOpacity to go to cart */}
+      {cartItems && (
+        <TouchableOpacity style={{backgroundColor:'black', width: "100%", alignSelf:"center",justifyContent:'center',alignContent:'center', alignItems:'center',height:'100%', borderRadius: 10}} >
+          <Text style={{color:'white'}}>GO TO CART</Text>
+        </TouchableOpacity>
+      )}
+    </View>
+      <Navbar />
     </View>
   );
 };
@@ -79,6 +98,7 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     borderRadius: 5,
     padding: 10,
+    position: 'relative'
   },
   itemImage: {
     width: 80,
@@ -96,15 +116,23 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
   },
-  addButton: {
+  quantityContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  quantityButton: {
     backgroundColor: 'green',
     paddingHorizontal: 10,
     paddingVertical: 5,
     borderRadius: 5,
   },
-  addButtonText: {
+  quantityButtonText: {
     color: '#fff',
     fontWeight: 'bold',
+  },
+  quantity: {
+    marginHorizontal: 10,
+    fontSize: 18,
   },
 });
 

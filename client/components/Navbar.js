@@ -1,6 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity, Text, StyleSheet, Image } from 'react-native';
-import SvgUri from 'react-native-svg';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 const TransparentButton = ({ title, onPress }) => {
   return (
@@ -19,7 +18,7 @@ const App = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={{alignItems:"center"}}>
-        <Image source={require('../assets/home_icon.png')}  style={{ width: 30, height: 30 }} />
+        <Image source={require('../assets/home_icon.png')}  style={{ width: 30, height:  30 }} />
         <Text >Home</Text>
       </View>
       {/* <TransparentButton title="Button 1" onPress={() => handleButtonPress(1)} /> */}
@@ -27,6 +26,7 @@ const App = ({navigation}) => {
         <Image source={require('../assets/search.png')}  style={{ width: 30, height: 30 }} />
         <Text >Search</Text>
       </View>
+      
       <View style={{alignItems:"center"}}>
         <Image source={require('../assets/budget.png')}  style={{ width: 30, height: 30 }} onp/>
         <Text >Buy Budgetwise</Text>
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     position:'absolute',
     bottom:0,
-    width:'100%',
+    width:370,
     paddingBottom:30,
     paddingTop:10,
     backgroundColor: 'white',

@@ -88,7 +88,7 @@ function Login({ navigation }) {
             alignItems: 'center', 
             marginBottom: 10, 
             opacity: 0.8, 
-            width: '70%', 
+            width: '80%', 
             color: 'white'
             
 
@@ -117,7 +117,7 @@ function Login({ navigation }) {
             alignItems: 'center', 
             marginBottom: 10, 
             opacity: 0.8, 
-            width: '70%', 
+            width: '80%', 
             color: 'white'
             
 

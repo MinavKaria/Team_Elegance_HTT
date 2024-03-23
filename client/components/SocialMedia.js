@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { WebView } from 'react-native-webview';
 
-const IframeComponent = () => {
+const SocialMedia = () => {
   return (
     <View style={styles.container}>
       <WebView
@@ -22,4 +22,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default IframeComponent;
+export default SocialMedia;
