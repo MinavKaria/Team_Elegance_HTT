@@ -1,5 +1,7 @@
 import React from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import Navbar from './Navbar'
+
 
 export default function Home({navigation}) {
   return (
