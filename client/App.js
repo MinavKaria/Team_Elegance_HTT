@@ -12,10 +12,10 @@ export default function App() {
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Image
                 source={require('../client/assets/images/logo.png')}
-                style={{ width: 100, height: 50 }}
+                style={{ width: 60, height: 50 }}
                 resizeMode="contain"
               />
-              <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Zorko</Text>
+              <Text style={{ fontSize: 30, fontWeight: 'bold', paddingLeft: 10 }}>Zorko</Text>
               </View>
               
               ),}} component={Home} />
