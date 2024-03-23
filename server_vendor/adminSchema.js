@@ -3,7 +3,10 @@ import mongoose from 'mongoose';
 const adminSchema = new mongoose.Schema({
     id: Number,
     name: String,
-    location: String,
+    location: {
+        latitude: Number,
+        longitude: Number
+    },
     foodMenu:[{
         foodName:String,
         quantity:Number,

@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { Keyboard, KeyboardAvoidingView, StyleSheet, Switch, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
 import Navbar from './Navbar';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const ZorkoPage = ({ navigation }) => {
   const [budget, setBudget] = useState('');
   const [partyFood, setPartyFood] = useState(false); // State to track party food preference
-  const [partyPeople, setPartyPeople] = useState(''); 
+  const [partyPeople, setPartyPeople] = useState('1'); 
   const [partyFoodBudget, setPartyFoodBudget] = useState('');
 
   const handleBudgetChange = (text) => {
@@ -25,14 +26,17 @@ const ZorkoPage = ({ navigation }) => {
           <TextInput
             style={styles.input}
             placeholder="Enter your budget"
-            
+            value={budget}
             keyboardType="numeric"
             maxLength={5}
-          
+            onChangeText={(text) => {
+              setBudget(text);
+
+            }}
             
 
           />
-          {budget && <Text style={{ padding: 12,color:'white' }}>Selected budget: {budget}</Text>}
+          {/* {budget && <Text style={{ padding: 12,color:'white' }}>Selected budget: {budget}</Text>} */}
           <View style={styles.partyFoodContainer}>
             <Text style={{ marginRight: 10, color: '#FF8E5E' }}>Need food for the party?</Text>
             <Switch
@@ -90,7 +94,11 @@ const ZorkoPage = ({ navigation }) => {
           }}
           onPress={() => {
             console.log('Login');
-            navigation.navigate('Cart');
+            AsyncStorage.setItem('budget', budget);
+            AsyncStorage.setItem('partyFood', partyFood.toString());
+            AsyncStorage.setItem('partyPeople', partyPeople);
+            AsyncStorage.setItem('partyFoodBudget', partyFoodBudget);
+            navigation.navigate('LocationComponent'); 
           }}
         >
           <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>SUBMIT</Text>

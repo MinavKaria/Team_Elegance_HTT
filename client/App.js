@@ -11,6 +11,7 @@ import Profile from './components/Profile';
 import QuestionPage1 from './components/QuestionPage1';
 import SocialMedia from './components/SocialMedia';
 import VerifyOTP from './components/VerifyOTP';
+import LocationComponent from './components/Location';
 
 const Stack = createStackNavigator();
 export default function App() {
@@ -76,6 +77,11 @@ export default function App() {
           name="Cart"
           component={Cart}
           options={{ title: 'Cart' }}
+        />
+        <Stack.Screen
+          name="LocationComponent"
+          component={LocationComponent}
+          options={{ title: 'Location' }}
         />
      
     </Stack.Navigator>
