@@ -1,8 +1,8 @@
-import express from 'express';
 import dotenv from 'dotenv';
+import express from 'express';
 
-import twilio from 'twilio';
 import bodyParser from 'body-parser';
+import twilio from 'twilio';
 
 import mongoose from 'mongoose';
 import User from './userSchema.js';
@@ -131,6 +131,22 @@ app.get('/getUserRecommendations', async (req, res) => {
         res.status(500).send("An error occurred while fetching recommendations");
     }
 });
+
+app.post('/addMenu', async(req,res)=>{
+    try {
+        // Create a new Zorko instance using the data from the request body
+        const { food, price } = req.body;
+        const newZorko = new Zorko({ food, price });
+    
+        // Save the new Zorko instance to the database
+        const savedZorko = await newZorko.save();
+    
+        res.status(201).json(savedZorko);
+      } catch (error) {
+        console.error('Error saving Zorko:', error);
+        res.status(500).json({ error: 'Internal server error' });
+      }
+})
 
 
 app.listen(PORT, () => {

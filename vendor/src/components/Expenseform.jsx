@@ -11,7 +11,7 @@ const ExpressForm = ({charge,amount,handleCharge,handleAmount,handleSubmit, edit
           value={charge} onChange={handleCharge}></input>
         </div>
         <div className='form-group'>
-          <label htmlFor='amount'>COST PER DISH:&nbsp;&nbsp;&nbsp;</label>
+          <label htmlFor='amount'>amount:&nbsp;&nbsp;&nbsp;</label>
           <input type='number' className='form-control' id='amount' name='amount' placeholder='e.g. 100'
           value={amount} onChange={handleAmount}></input>
         </div>
