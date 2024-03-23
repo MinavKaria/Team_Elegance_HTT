@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
-
+import Navbar from './Navbar';
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -44,6 +44,12 @@ export default class App extends Component {
     const { myLocation, destination, distance } = this.state;
 
     return (
+      <View style={{
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+      
+      }}>
       <View style={styles.container}>
         <MapView style={styles.map} initialRegion={{ ...myLocation, latitudeDelta: 0.5, longitudeDelta: 0.5 }}>
           <Marker coordinate={myLocation} title="My Location" />
@@ -51,6 +57,9 @@ export default class App extends Component {
         </MapView>
         <Button color="#bdc3c7" onPress={this.calculateDistance} title="Calculate Distance" />
         {distance !== null && <Text>Distance: {distance.toFixed(2)} km</Text>}
+        
+      </View>
+      <Navbar/>
       </View>
     );
   }

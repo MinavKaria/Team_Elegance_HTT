@@ -10,7 +10,7 @@ const TransparentButton = ({ title, onPress }) => {
   );
 };
 
-const App = () => {
+const App = ({navigation}) => {
   const handleButtonPress = (buttonIndex) => {
     // Handle button press here
     console.log(`Button ${buttonIndex} pressed`);
@@ -28,10 +28,12 @@ const App = () => {
         <Text >Search</Text>
       </View>
       <View style={{alignItems:"center"}}>
-        <Image source={require('../assets/budget.png')}  style={{ width: 30, height: 30 }} />
+        <Image source={require('../assets/budget.png')}  style={{ width: 30, height: 30 }} onp/>
         <Text >Buy Budgetwise</Text>
       </View>
-      <View style={{alignItems:"center"}}>
+      <View style={{alignItems:"center"}} onPress={()=>{
+            navigation.navigate('Profile');
+      }}>
         <Image source={require('../assets/profile.png')}  style={{ width:30, height: 30 }} />
         <Text >Profile</Text>
       </View>

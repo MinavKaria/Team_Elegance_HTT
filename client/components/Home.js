@@ -55,6 +55,7 @@ const FoodMenuPage = ({navigation}) => {
         color="#841584"
         style={{ width: '100%'}}
       />
+      <Navbar/>
     </View>
   );
 };
