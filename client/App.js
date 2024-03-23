@@ -18,11 +18,6 @@ export default function App() {
       <Stack.Screen name="Zorko"  options={{
             headerTitle: () => (
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <Image
-                source={require('../client/assets/images/logo.png')}
-                style={{ width: 60, height: 50 }}
-                resizeMode="contain"
-              />
               <Text style={{ fontSize: 30, fontWeight: 'bold', paddingLeft: 10 }}>Zorko</Text>
               </View>
               
@@ -33,11 +28,7 @@ export default function App() {
           options={{
             headerTitle: () => (
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <Image
-                source={require('../client/assets/images/logo.png')}
-                style={{ width: 60, height: 50 }}
-                resizeMode="contain"
-              />
+               
               <Text style={{ fontSize: 30, fontWeight: 'bold', paddingLeft: 10 }}>Zorko</Text>
               </View>
               

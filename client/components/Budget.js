@@ -1,51 +1,84 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Button, TouchableOpacity, Image} from 'react-native';
-import DropDownPicker from 'react-native-dropdown-picker';
-import RNPickerSelect from 'react-native-picker-select';
-import Navbar from './Navbar'
+import { View, Text, StyleSheet, Button, TouchableOpacity, TextInput, Switch } from 'react-native';
+import Navbar from './Navbar';
 
-const ZorkoPage = () => {
+const ZorkoPage = ({ navigation }) => {
+  const [budget, setBudget] = useState('');
+  const [partyFood, setPartyFood] = useState(false); // State to track party food preference
 
-    const [selectedValue, setSelectedValue] = useState(null);
-    const [buton, setButon] = useState(false);
+  const handleBudgetChange = (text) => {
+    // Limiting input to accept only numeric values
+    if (/^\d*$/.test(text)) {
+      setBudget(text);
+    }
+  };
 
-    const placeholder = {
-      label: 'Select an option...',
-      value: null,
-    };
-  
-    const options = [
-      { label: '500', value: '500' },
-      { label: '1000', value: '1000' },
-      { label: '1500', value: '1500' },
-      { label: '2000', value: '2000'},
-      { label: '>2000', value:'>2000'}
-
-    ];
-    
   return (
     <View style={styles.container}>
-      <View style={styles.idealworld}>
-      <Text style={styles.title}>Control your <Text style={{color:'#FF8E5E'}}>Budget</Text> stress-free!</Text>
-      <RNPickerSelect
-        placeholder={placeholder}
-        items={options}
-        onValueChange={(value) => setSelectedValue(value)}
-        value={selectedValue}
+      <Text style={styles.title}>
+      Control your 
+      <Text style={{ color: 'black' }}> Budget</Text> stress-free!</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Enter your budget"
+        onChangeText={handleBudgetChange}
+        value={budget}
+        keyboardType="numeric"
+        maxLength={5} // Limiting input to 5 characters
       />
-      {selectedValue && <Text style={{padding:12}}>Selected: {selectedValue}</Text>}
-      {console.log(selectedValue)}
-
-      <View>
-      <Button 
-      
-  title="Submit"
-  onPress={() => {console.log("Button clicked")}} 
-/> 
-    </View>
+      {budget && <Text style={{ padding: 12 }}>Selected: {budget}</Text>}
+      <View style={styles.partyFoodContainer}>
+        <Text style={{ marginRight: 10 }}>Need food for the party?</Text>
+        <Switch
+          value={partyFood}
+          onValueChange={(value) => setPartyFood(value)}
+          trackColor={{ false: "#767577", true: "#81b0ff" }}
+          thumbColor={partyFood ? "#f5dd4b" : "#f4f3f4"}
+          ios_backgroundColor="#3e3e3e"
+        />
+       
       </View>
+      <View style={{alignSelf:'center'}}>
+      {partyFood && (
+          <>
+            <View style={{width:"100%", display:'flex',gap:'10px'}}>
+              <Text>Party food selected</Text>
+              <TextInput
+              style={styles.input}
+              placeholder="Enter your budget"
+              onChangeText={handleBudgetChange}
+              value={budget}
+              keyboardType="numeric"
+              maxLength={5} 
+              ></TextInput>
+
+              <Text>Number of people</Text>
+              <TextInput
+              style={styles.input}
+              placeholder="Enter your budget"
+              onChangeText={handleBudgetChange}
+              value={budget}
+              keyboardType="numeric"
+              maxLength={5} 
+              ></TextInput>
+            </View>
+            
+          </>
+        )}
+      </View>
+      <View style={{
+      backgroundColor:'black',color:"white"}} >
       
-    <Navbar style={{padding:'1992px', height:'10vh'}}/>
+        <Button
+          title="Submit"
+          onPress={() => {
+            navigation.navigate('Maps');
+          }}
+          disabled={!budget} 
+          color="black"
+        />
+      </View>
+      <Navbar/>
     </View>
   );
 };
@@ -53,29 +86,33 @@ const ZorkoPage = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'start',
+    justifyContent: 'top',
+    alignItems: 'center',
     padding: 12,
-    position: "absolute",
-    height: "100%"
+    backgroundColor: '#FFF7FC', // Orange color theme
+    height:'100%',
+    paddingTop:'10%'
   },
   title: {
     fontSize: 40,
     fontWeight: 'bold',
     marginBottom: 24,
-    textAlign: 'center',
-    position: "relative",
-    top: 0
+
   },
-  Navbar:{
-    marginTop:'200px'
+  input: {
+    borderWidth: 1,
+    borderColor: '#fff', // White border color
+    borderRadius: 5,
+    padding: 10,
+    marginBottom: 20,
+    width: '100%',
+    backgroundColor: '#fff', // White background color
   },
-  // idealworld:{
-  //   position: "absolute",
-  //   top: 2,
-  //   minWidth: "100%"
-    
-  // }
+  partyFoodContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 20
+  },
 });
 
 export default ZorkoPage;

@@ -1,14 +1,21 @@
 import React from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View, Animated } from 'react-native';
+import { useRef, useEffect } from 'react';
+
 
 export default function Home({navigation}) {
   return (
     <View style={{ flex: 1 }}>
-        <View style={{ flex: 1}}>
-          
+        <View style={{ flex: 1,display:"flex",justifyContent:"center"}}>
+        <Image
+              source={require('../assets/images/logo.png')}
+              style={{ width: 200, height: 200, position: 'absolute', top: 100, left: 100}}
+               
+              />
         </View>
         <View>
             <Image source={require('../assets/images/Rectangle 1wave.png')} style={{width:"100%"}}/>
+           
             <View style={{
         position: 'absolute',
         top: "35%",

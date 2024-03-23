@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, Text, StyleSheet, Image } from 'react-native';
+import SvgUri from 'react-native-svg';
 
 const TransparentButton = ({ title, onPress }) => {
   return (
@@ -17,10 +18,23 @@ const App = () => {
 
   return (
     <View style={styles.container}>
-      <TransparentButton title="Button 1" onPress={() => handleButtonPress(1)} />
-      <TransparentButton title="Button 2" onPress={() => handleButtonPress(2)} />
-      <TransparentButton title="Button 3" onPress={() => handleButtonPress(3)} />
-      <TransparentButton title="Button 4" onPress={() => handleButtonPress(4)} />
+      <View style={{alignItems:"center"}}>
+        <Image source={require('../assets/home_icon.png')}  style={{ width: 30, height: 30 }} />
+        <Text >Home</Text>
+      </View>
+      {/* <TransparentButton title="Button 1" onPress={() => handleButtonPress(1)} /> */}
+      <View style={{alignItems:"center"}}>
+        <Image source={require('../assets/search.png')}  style={{ width: 30, height: 30 }} />
+        <Text >Search</Text>
+      </View>
+      <View style={{alignItems:"center"}}>
+        <Image source={require('../assets/budget.png')}  style={{ width: 30, height: 30 }} />
+        <Text >Buy Budgetwise</Text>
+      </View>
+      <View style={{alignItems:"center"}}>
+        <Image source={require('../assets/profile.png')}  style={{ width:30, height: 30 }} />
+        <Text >Profile</Text>
+      </View>
     </View>
   );
 };
@@ -35,7 +49,11 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     position:'absolute',
     bottom:0,
-    gap:12
+    width:'100%',
+    paddingBottom:30,
+    paddingTop:10,
+    backgroundColor: 'white',
+    boxShadow: '0 0 10px 0 rgba(0, 0, 0, 1)',
   },
   button: {
     backgroundColor: 'transparent',

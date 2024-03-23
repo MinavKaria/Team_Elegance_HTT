@@ -5,7 +5,7 @@ import twilio from 'twilio';
 import bodyParser from 'body-parser';
 
 import mongoose from 'mongoose';
-
+import User from './userSchema.js';
 const PORT= 3000;
 const app = express();
 

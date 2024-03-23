@@ -15,7 +15,7 @@ const AgeAndNameInput = ({navigation}) => {
   };
 
   const handleSubmit = () => {
-    navigation.navigate('Home');
+    navigation.navigate('Budget');
     AsyncStorage.setItem('name', name);
     AsyncStorage.setItem('age', age);
     // You can perform further actions with the submitted data here
