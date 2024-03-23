@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity, Image, Button } from 'react-native';
+import React from 'react';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import Navbar from './Navbar'
+
 
 const menuData = [
   { id: 1, name: 'Pizza', price: '$10', image: require('../assets/advertisement.jpg') },

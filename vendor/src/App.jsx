@@ -114,7 +114,7 @@ function App() {
     <div className="App">
       {alert.show && <Alert type={alert.type} text= {alert.text} />}
      
-      <h1>ZORKO'S MENU</h1>
+      <h1 id='title-text'>ZORKO'S MENU</h1>
       <main className='App'>
         <ExpressForms charge={charge} 
         amount={amount} 
