@@ -1,85 +1,108 @@
-import React from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, FlatList, StyleSheet, TouchableOpacity, Image, Button } from 'react-native';
 
-export default function Home({navigation}) {
+const menuData = [
+  { id: 1, name: 'Pizza', price: '$10', image: require('../assets/advertisement.jpg') },
+  { id: 2, name: 'Burger', price: '$8', image: require('../assets/advertisement.jpg') },
+  { id: 3, name: 'Salad', price: '$6', image: require('../assets/advertisement.jpg') },
+  // Add more items as needed
+];
+
+const FoodMenuPage = ({navigation}) => {
+  const [cartItems, setCartItems] = useState({});
+
+  const addToCart = (item) => {
+    const updatedCart = { ...cartItems };
+    updatedCart[item.id] = (updatedCart[item.id] || 0) + 1;
+    setCartItems(updatedCart);
+  };
+
+  const renderItem = ({ item }) => (
+    <View style={styles.itemContainer}>
+      <Image source={item.image} style={styles.itemImage} resizeMode="cover" />
+      <View style={styles.itemDetails}>
+        <Text style={styles.itemName}>{item.name}</Text>
+        <Text style={styles.itemPrice}>{item.price}</Text>
+      </View>
+      {cartItems[item.id] > 0 && (
+        <TouchableOpacity style={styles.addButton} onPress={() => addToCart(item)}>
+          <Text style={styles.addButtonText}>{`+${cartItems[item.id]}`}</Text>
+        </TouchableOpacity>
+      )}
+      {cartItems[item.id] === undefined && (
+        <TouchableOpacity style={styles.addButton} onPress={() => addToCart(item)}>
+          <Text style={styles.addButtonText}>Add to Cart</Text>
+        </TouchableOpacity>
+      )}
+    </View>
+  );
+
   return (
-    <View style={{ flex: 1 }}>
-        <View style={{ flex: 1}}></View>
-        <View>
-            <Image source={require('../assets/images/Rectangle 1wave.png')} style={{width:"100%"}}/>
-            <View style={{
-        position: 'absolute',
-        top: "35%",
-        left: 20,
-       
-        justifyContent: 'center',
-        alignItems: 'center',
-        
-      }}>
-                <Text style={{ color: 'white', fontSize: 24, fontWeight: 'bold' }}>BUDGET YOUR BITES</Text>
-                <Text style={{ color: 'white', fontSize: 24, fontWeight: 'bold', position: 'relative' }}>INSTANTLY</Text>
-            </View>
-            <Image source={require('../assets/images/Vector 1ovall.png')} style={{position: 'absolute', top:"43%", left:"15%"}}/>
-        </View>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-around', paddingHorizontal: 20, position:"absolute", bottom: 15, left: 10 }}>
-      <View style={{ width: 150 }}>
-        <TouchableOpacity
-          style={{ 
-            backgroundColor: '#0F1730', 
-            height: 40, 
-            borderRadius: 5, 
-            justifyContent: 'center', 
-            alignItems: 'center', 
-            marginBottom: 10, 
-            opacity: 0.8, 
-            width: '100%' 
-          }}
-          onPress={() => {
-            console.log('Login');
-            navigation.navigate('Login');
-          }}
-        >
-          <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>LOGIN</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={{ width: 150 }}>
-        <TouchableOpacity
-          style={{ 
-            backgroundColor: '#0F1730', 
-            height: 40, 
-            borderRadius: 5, 
-            justifyContent: 'center', 
-            alignItems: 'center', 
-            marginBottom: 10, 
-            opacity: 0.8, 
-            width: '100%' 
-          }}
-          onPress={() =>navigation.navigate('Budget')}
-        >
-          <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>SIGN UP</Text>
-        </TouchableOpacity>
-      </View>
+    <View style={styles.container}>
+      <Text style={styles.sectionTitle}>Menu</Text>
+      <FlatList
+        data={menuData}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id.toString()}
+      />
+       <Button
+        title="Submit"
+        onPress={()=>{
+            navigation.navigate('Maps');
+        }}
+        color="#841584"
+        style={{ width: '100%'}}
+      />
     </View>
-    </View>
-  )
-}
+  );
+};
+
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: 'center',
-      marginHorizontal: 16,
-    },
-    title: {
-      textAlign: 'center',
-      marginVertical: 8,
-    },
-    fixToText: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-    },
-    separator: {
-      marginVertical: 8,
-      borderBottomColor: '#737373',
-      borderBottomWidth: StyleSheet.hairlineWidth,
-    },
-  });
+  container: {
+    flex: 1,
+    padding: 20,
+  },
+  sectionTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  itemContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 10,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5,
+    padding: 10,
+  },
+  itemImage: {
+    width: 80,
+    height: 80,
+    borderRadius: 5,
+  },
+  itemDetails: {
+    flex: 1,
+    marginLeft: 10,
+  },
+  itemName: {
+    fontSize: 18,
+  },
+  itemPrice: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  addButton: {
+    backgroundColor: 'green',
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 5,
+  },
+  addButtonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+  },
+});
+
+export default FoodMenuPage;

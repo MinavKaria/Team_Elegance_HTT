@@ -39,7 +39,7 @@ const ZorkoPage = () => {
       <Button 
       
   title="Submit"
-  onPress={() => {console.log("Button clicked+")}} 
+  onPress={() => {console.log("Button clicked")}} 
 /> 
     </View>
     </View>
