@@ -11,7 +11,6 @@ import Profile from './components/Profile';
 import QuestionPage1 from './components/QuestionPage1';
 import SocialMedia from './components/SocialMedia';
 import VerifyOTP from './components/VerifyOTP';
-
 const Stack = createStackNavigator();
 export default function App() {
   return (

@@ -29,8 +29,8 @@ export default function Home({navigation}) {
             </View>
             <Image source={require('../assets/images/Vector 1ovall.png')} style={{position: 'absolute', top:"42%", left:"28%"}}/>
         </View>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-around', paddingHorizontal: 20, position:"absolute", bottom: 15, left: 10 }}>
-      <View style={{ width: "100%" }}>
+        <View style={{ flexDirection: 'row', justifyContent: 'center',  alignContent:'center', justifyItmes:'center',alignItems:'center', position:"absolute", bottom: 15}}>
+      <View style={{ width: "95%" , flexDirection: 'row', justifyContent: 'center',  alignContent:'center', justifyItmes:'center',alignItems:'center',}}>
         <TouchableOpacity
           style={{ 
             backgroundColor: 'black', 
@@ -38,6 +38,7 @@ export default function Home({navigation}) {
             borderRadius: 5, 
             justifyContent: 'center', 
             alignItems: 'center', 
+            alignContent:'center', justifyItmes:'center',alignItems:'center',
             marginBottom: 10, 
             opacity: 0.8, 
             width: '100%', 

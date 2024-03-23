@@ -4,9 +4,9 @@ import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react
 import Navbar from './Navbar';
 
 const menuData = [
-  { id: 1, name: 'Pizza', price: '$10', image: require('../assets/advertisement.jpg') },
-  { id: 2, name: 'Burger', price: '$8', image: require('../assets/advertisement.jpg') },
-  { id: 3, name: 'Salad', price: '$6', image: require('../assets/advertisement.jpg') },
+  { id: 1, foodName: 'Pizza', price: '$10', image: require('../assets/advertisement.jpg') },
+  { id: 2, foodName: 'Burger', price: '$8', image: require('../assets/advertisement.jpg') },
+  { id: 3, foodName: 'Salad', price: '$6', image: require('../assets/advertisement.jpg') },
   // Add more items as needed
 ];
 
@@ -35,7 +35,7 @@ const FoodMenuPage = ({ navigation }) => {
     <View style={styles.itemContainer}>
       <Image source={item.image} style={styles.itemImage} resizeMode="cover" />
       <View style={styles.itemDetails}>
-        <Text style={styles.itemName}>{item.name}</Text>
+        <Text style={styles.itemName}>{item.foodName}</Text>
         <Text style={styles.itemPrice}>{item.price}</Text>
       </View>
       <View style={styles.quantityContainer}>
@@ -69,7 +69,10 @@ const FoodMenuPage = ({ navigation }) => {
 
       {/* TouchableOpacity to go to cart */}
       {cartItems && (
-        <TouchableOpacity style={{backgroundColor:'black', width: "100%", alignSelf:"center",justifyContent:'center',alignContent:'center', alignItems:'center',height:'100%', borderRadius: 10}} >
+        <TouchableOpacity style={{backgroundColor:'black', width: "100%", alignSelf:"center",justifyContent:'center',alignContent:'center', alignItems:'center',height:'100%', borderRadius: 10}} onPress={() => {
+            console.log('Login');
+            navigation.navigate('Cart');
+          }} >
           <Text style={{color:'white'}}>GO TO CART</Text>
         </TouchableOpacity>
       )}

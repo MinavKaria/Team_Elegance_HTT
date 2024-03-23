@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native'; // Import useNavigation hook
 import React from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
@@ -9,61 +10,62 @@ const TransparentButton = ({ title, onPress }) => {
   );
 };
 
-const App = ({navigation}) => {
-  const handleButtonPress = (buttonIndex) => {
-    // Handle button press here
-    console.log(`Button ${buttonIndex} pressed`);
+const Navbar = () => {
+  const navigation = useNavigation(); // Use useNavigation hook to get navigation object
+
+  const handleButtonPress = (screenName) => {
+    navigation.navigate(screenName); // Navigate to the specified screen
   };
 
   return (
     <View style={styles.container}>
-      <View style={{alignItems:"center"}}>
-        <Image source={require('../assets/home_icon.png')}  style={{ width: 30, height:  30 }} />
-        <Text >Home</Text>
-      </View>
-      {/* <TransparentButton title="Button 1" onPress={() => handleButtonPress(1)} /> */}
-      <View style={{alignItems:"center"}}>
-        <Image source={require('../assets/search.png')}  style={{ width: 30, height: 30 }} />
-        <Text >Search</Text>
-      </View>
-      
-      <View style={{alignItems:"center"}}>
-        <Image source={require('../assets/budget.png')}  style={{ width: 30, height: 30 }} onp/>
-        <Text >Buy Budgetwise</Text>
-      </View>
-      <View style={{alignItems:"center"}} onPress={()=>{
-            navigation.navigate('Profile');
-      }}>
-        <Image source={require('../assets/profile.png')}  style={{ width:30, height: 30 }} />
-        <Text >Profile</Text>
-      </View>
+      <TouchableOpacity style={styles.navItem} onPress={() => handleButtonPress('Home')}>
+        <Image source={require('../assets/home_icon.png')} style={styles.icon} />
+        <Text>Home</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.navItem} onPress={() => handleButtonPress('Maps')}>
+        <Image source={require('../assets/search.png')} style={styles.icon} />
+        <Text>Find nearest Store</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.navItem} onPress={() => handleButtonPress('Budget')}>
+        <Image source={require('../assets/budget.png')} style={styles.icon} />
+        <Text>Buy Budgetwise</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.navItem} onPress={() => handleButtonPress('Profile')}>
+        <Image source={require('../assets/profile.png')} style={styles.icon} />
+        <Text>Profile</Text>
+      </TouchableOpacity>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    display:"flex",
-    flexDirection:"row",
+    display: "flex",
+    flexDirection: "row",
     justifyContent: 'space-around',
-    borderColor: 'transparent',
     alignItems: 'center',
-    backgroundColor: 'transparent',
-    position:'absolute',
-    bottom:0,
-    width:370,
-    paddingBottom:30,
-    paddingTop:10,
     backgroundColor: 'white',
-    boxShadow: '0 0 10px 0 rgba(0, 0, 0, 1)',
+    position: 'absolute',
+    bottom: 0,
+    width: 370,
+    paddingBottom: 30,
+    paddingTop: 10,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
-  button: {
-    backgroundColor: 'transparent',
-    padding: 10,
-    marginBottom: 10,
-    borderWidth: 1,
-    borderColor: 'transparent',
-    borderRadius: 0, 
+  navItem: {
+    alignItems: 'center',
+  },
+  icon: {
+    width: 30,
+    height: 30,
   },
   buttonText: {
     fontSize: 16,
@@ -72,4 +74,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default Navbar;
