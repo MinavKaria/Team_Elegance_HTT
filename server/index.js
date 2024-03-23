@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 import twilio from 'twilio';
 import bodyParser from 'body-parser';
 
-
+import mongoose from 'mongoose';
 
 const PORT= 3000;
 const app = express();
@@ -57,12 +57,9 @@ app.post('/verifyOTP', async (req, res) => {
         } 
         else if (verificationStatus === "pending") 
         {
-            res.send("OTP verification is pending");
+            res.send("Something went wrong. Please try again");
         } 
-        else 
-        {
-            res.send("OTP verification failed");
-        }
+       
     } 
     catch (error) 
     {
@@ -71,6 +68,69 @@ app.post('/verifyOTP', async (req, res) => {
     }
 });
 
+
+
+
+
+const uri = 'mongodb+srv://htt20:abcd@cluster0.fjislfp.mongodb.net/';
+
+
+try
+{
+    mongoose.connect(uri);
+    console.log("Connected to MongoDB");
+}
+catch (error)
+{
+    console.error("Error connecting to MongoDB:", error);
+}
+
+app.post('/addUser',(req,res)=>{
+    const {name,age,email,recommendation,phone}=req.body;
+    const user=new User({name,age,email,recommendation,phone});
+    user.save().then(()=>{
+        res.send("User added successfully");
+    }).catch((error)=>{
+        console.error("Error adding user:",error);
+        res.status(500).send("An error occurred while adding user");
+    });
+});
+
+app.get('/getUsers', async (req, res) => {
+    try 
+    {
+        const collection = db.collection('users');
+        const users = await collection.find({}).toArray();
+        res.send(users);
+    } catch (error) {
+        console.error("Error fetching users:", error);
+        res.status(500).send("An error occurred while fetching users");
+    }
+});
+
+app.post('/addUser',(req,res)=>{
+    const {name,age,email,recommendation,phone}=req.body;
+    const user=new User({name,age,email,recommendation,phone});
+    user.save().then(()=>{
+        res.send("User added successfully");
+    }).catch((error)=>{
+        console.error("Error adding user:",error);
+        res.status(500).send("An error occurred while adding user");
+    });
+}  );
+
+app.get('/getUserRecommendations', async (req, res) => {
+    try {
+        const client = await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+        const db = client.db('htt');
+        const collection = db.collection('recommendations');
+        const recommendations = await collection.find({}).toArray();
+        res.send(recommendations);
+    } catch (error) {
+        console.error("Error fetching recommendations:", error);
+        res.status(500).send("An error occurred while fetching recommendations");
+    }
+});
 
 
 app.listen(PORT, () => {
