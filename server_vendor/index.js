@@ -2,9 +2,12 @@ import express from 'express';
 import  bodyParser  from 'body-parser';
 import mongoose from 'mongoose';
 import Admin from './adminSchema.js';
+import cors from 'cors';
 
 const app = express();
 const port=3000;
+
+app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -20,6 +23,35 @@ catch (error)
 {
     console.error("Error connecting to MongoDB:", error);
 }
+
+app.post('/signup', async (req, res) => {
+    const { name, email, password } = req.body;
+    try {
+        const admin = new Admin({ name, email, password });
+        await admin.save();
+        res.send("Admin signed up successfully");
+    } catch (error) {
+        console.error("Error signing up:", error);
+        res.status(500).send("An error occurred while signing up");
+    }
+});
+
+// Login Endpoint
+app.post('/login', async (req, res) => {
+    const { email, password } = req.body;
+    try {
+        const admin = await Admin.findOne({ email, password });
+        if (admin) {
+            res.send("Login successful");
+        } else {
+            res.status(401).send("Invalid email or password");
+        }
+    } catch (error) {
+        console.error("Error logging in:", error);
+        res.status(500).send("An error occurred while logging in");
+    }
+});
+
 
 app.post('/addAdmin',(req,res)=>{
     const { id, name, location, foodMenu, DateOfJoining, phone, email, age, upVotes, downVotes, password, offers } = req.body;
