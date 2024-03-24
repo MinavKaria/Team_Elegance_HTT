@@ -44,6 +44,16 @@ app.put('/updateAdmin/:id',(req,res)=>{
     });
 });
 
+app.get('/getAdmin', async (req, res) => {
+        try {
+            console.log("Getting admins");
+            const admins = await Admin.find();
+            res.send(admins);
+        } catch (error) {
+            console.error("Error getting admins:", error);
+            res.status(500).send("An error occurred while getting admins");
+        }
+    });
 
 
 
