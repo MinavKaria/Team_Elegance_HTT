@@ -19,7 +19,10 @@
   }
   
   .username-input,
-  .password-input {
+  .password-input,
+  .food-input,
+  .quantity-input,
+  .price-input {
     background-color: #333; /* Dark gray */
     border: none;
     border-radius: 5px;

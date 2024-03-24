@@ -21,6 +21,8 @@ const adminSchema = new mongoose.Schema({
     password:String
 });
 
+//ID, Food menu, email, password
+
 const Admin = mongoose.model('Admin', adminSchema);
 
 export default Admin;
