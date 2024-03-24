@@ -33,6 +33,7 @@ const Login = () => {
       price
     };
     console.log(vendorData);
+    navigate('/home')
   };
 
   return (

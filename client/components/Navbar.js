@@ -48,12 +48,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     position: 'absolute',
     bottom: 0,
-    width: 370,
+    width: 400,
     paddingBottom: 30,
     paddingTop: 10,
     shadowColor: '#000',
     shadowOffset: {
-      width: 0,
+      width: '100%',
       height: 2,
     },
     shadowOpacity: 0.25,
@@ -62,6 +62,8 @@ const styles = StyleSheet.create({
   },
   navItem: {
     alignItems: 'center',
+    width:'100vw',
+    right:5
   },
   icon: {
     width: 30,

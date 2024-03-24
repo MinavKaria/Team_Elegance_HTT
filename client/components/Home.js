@@ -158,10 +158,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   navbar: {
-    position: 'absolute',
+    position: 'relative',
     bottom: 0,
     width: '100%',
-  },
+    left:'5.5%',
+    },
 });
 
 export default FoodMenuPage;
