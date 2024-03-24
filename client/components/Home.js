@@ -1,6 +1,7 @@
 import { FontAwesome5 } from '@expo/vector-icons'; // Import the icon component
 import React, { useState } from 'react';
 import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import Cashbacks from './Cashbacks';
 import Navbar from './Navbar';
 
 const menuData = [
@@ -55,7 +56,10 @@ const FoodMenuPage = ({ navigation }) => {
   );
 
   return (
+
+
     <View style={styles.container}>
+    <Cashbacks/>
       <Text style={styles.sectionTitle}>Menu</Text>
       <FlatList
         data={menuData}

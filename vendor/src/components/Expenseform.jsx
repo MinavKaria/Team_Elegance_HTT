@@ -1,6 +1,7 @@
 import React from 'react'
 import { MdSend } from 'react-icons/md'
 import './Expenseform.css'
+import Image from './Image'
 const ExpressForm = ({charge,amount,handleCharge,handleAmount,handleSubmit, edit}) => {
   return (
     <form onSubmit={handleSubmit}>
@@ -15,6 +16,7 @@ const ExpressForm = ({charge,amount,handleCharge,handleAmount,handleSubmit, edit
           <input type='number' className='form-control' id='amount' name='amount' placeholder='e.g. 100'
           value={amount} onChange={handleAmount}></input>
         </div>
+        <Image/>
       </div>
       <button type='submit' className='btn'>{edit.show? 'edit':"submit"} <MdSend className='btn-icon'/></button>
     </form>
