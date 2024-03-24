@@ -4,10 +4,11 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import axios from 'axios';
 import Navbar from './Navbar';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Carousel from './Cashbacks';
 
 const FoodMenuPage = ({ navigation,route }) => {
 
-  const { budget } = route.params;
+  const { budget } = route.params 
   const [menuData, setMenuData] = useState([]);
   const [cartItems, setCartItems] = useState({});
   const [addedItem, setAddedItem] = useState(null);
@@ -47,10 +48,13 @@ const FoodMenuPage = ({ navigation,route }) => {
       setCartItems(updatedCart);
     }
   };
+  
 
   return (
     <SafeAreaView style={styles.container}>
+      
       <ScrollView>
+      <Carousel/>
         <Text style={styles.sectionTitle}>Menu</Text>
         {loading ? (
           <Text>Loading...</Text>

@@ -14,7 +14,7 @@ const Navbar = () => {
   const navigation = useNavigation(); // Use useNavigation hook to get navigation object
 
   const handleButtonPress = (screenName) => {
-    navigation.navigate(screenName); // Navigate to the specified screen
+    navigation.navigate(screenName,{budget: Number.MAX_SAFE_INTEGER}); // Navigate to the specified screen
   };
 
   return (
@@ -23,7 +23,7 @@ const Navbar = () => {
         <Image source={require('../assets/home_icon.png')} style={styles.icon} />
         <Text>Home</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.navItem} onPress={() => handleButtonPress('Locations')}>
+      <TouchableOpacity style={styles.navItem} onPress={() => handleButtonPress('LocationComponent')}>
         <Image source={require('../assets/search.png')} style={styles.icon} />
         <Text>Find nearest Store</Text>
       </TouchableOpacity>
