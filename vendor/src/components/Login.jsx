@@ -17,34 +17,26 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      
-      const route = isSignUp ? '/signup' : '/login';
-      const userData = {
-        username,
-        password,
-        foodName,
-        quantity,
-        price
-      };
+    // Handle login logic here (e.g., send data to backend)
+    // console.log('Username:', username);
+    // console.log('Password:', password);
+    // console.log('Food:', foodName);
+    // console.log('quantity:', quantity);
+    // console.log('price:', price);
+    setUsername('');
+    setPassword('');
+    setFoodName('');
+    setPrice('');
+    setQuantity('');
 
-      // Sending data to backend using Axios
-      
-
-      // Example handling after successful login/signup
-      localStorage.setItem('username', username);
-      localStorage.setItem('name', password);
-      localStorage.setItem('foodName', foodName);
-      localStorage.setItem('quantity', quantity);
-      localStorage.setItem('price', price);
-      navigate('/home');
-      
-      console.log(response.data); // Response from the backend
-    } catch (error) {
-      console.error('Error:', error);
-      // Handle error (e.g., display error message)
-    }
-
+    const vendorData = {
+      uuidv4,
+      foodName,
+      quantity,
+      price
+    };
+    console.log(vendorData);
+    navigate('/home')
   };
 
   return (
