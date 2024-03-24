@@ -12,10 +12,10 @@ export const ExpenseList = ({ expenses, handleEdit, handleDelete }) => {
               <span>Rs. {expense.amount}</span>
             </div>
             <div>
-              <button style={{ backgroundColor: '#ffc107', color: '#fff', border: 'none', borderRadius: '5px', padding: '5px', marginRight: '5px', cursor: 'pointer' }} aria-label='edit button' onClick={() => handleEdit(expense.id)}>
+              <button style={{ backgroundColor: '#ffc107', color: '#fff', border: 'none', borderRadius: '5px', padding: '5px', marginRight: '15px', cursor: 'pointer' }} aria-label='edit button' onClick={() => handleEdit(expense.id)}>
                 <MdEdit />
               </button>
-              <button style={{ backgroundColor: '#dc3545', color: '#fff', border: 'none', borderRadius: '5px', padding: '5px', cursor: 'pointer' }} aria-label='delete button' onClick={() => handleDelete(expense.id)}>
+              <button style={{ backgroundColor: '#dc3545', color: '#fff', border: 'none', borderRadius: '5px', padding: '5px', marginRight: '15px', cursor: 'pointer' }} aria-label='delete button' onClick={() => handleDelete(expense.id)}>
                 <MdDelete />
               </button>
             </div>
