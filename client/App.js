@@ -1,14 +1,18 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Image, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import Budget from './components/Budget';
+import Cart from './components/Cart';
+import Home from './components/Home';
 import Landing from './components/Landing';
 import Login from './components/Login';
 import Maps from './components/Maps';
-import VerifyOTP from './components/VerifyOTP';
+import Profile from './components/Profile';
 import QuestionPage1 from './components/QuestionPage1';
-import { AppStateContext } from './components/Provider';
-import Home from './components/Home';
+import SocialMedia from './components/SocialMedia';
+import VerifyOTP from './components/VerifyOTP';
+import LocationComponent from './components/Location';
+
 const Stack = createStackNavigator();
 export default function App() {
   return (
@@ -47,7 +51,7 @@ export default function App() {
         <Stack.Screen
           name="QuestionPage1"
           component={QuestionPage1}
-          options={{ title: 'Question Page 1' }}
+          options={{ title: 'Details' }}
         />
         <Stack.Screen
           name="Home"
@@ -58,6 +62,26 @@ export default function App() {
           name="Maps"
           component={Maps}
           options={{ title: 'Maps' }}
+        />
+        <Stack.Screen
+          name="Profile"
+          component={Profile}
+          options={{ title: 'Profile' }}
+        />
+        <Stack.Screen
+          name="SocialMedia"
+          component={SocialMedia}
+          options={{ title: 'Profile' }}
+        />
+        <Stack.Screen
+          name="Cart"
+          component={Cart}
+          options={{ title: 'Cart' }}
+        />
+        <Stack.Screen
+          name="LocationComponent"
+          component={LocationComponent}
+          options={{ title: 'Location' }}
         />
      
     </Stack.Navigator>

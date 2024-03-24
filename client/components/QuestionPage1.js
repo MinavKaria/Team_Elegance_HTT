@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { useState } from 'react';
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 const AgeAndNameInput = ({navigation}) => {
   const [name, setName] = useState('');
@@ -23,14 +23,14 @@ const AgeAndNameInput = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>Name:</Text>
+      
       <TextInput
         style={styles.input}
         onChangeText={handleNameChange}
         value={name}
         placeholder="Enter your name"
       />
-      <Text style={styles.label}>Age:</Text>
+      
       <TextInput
         style={styles.input}
         onChangeText={handleAgeChange}
@@ -38,14 +38,30 @@ const AgeAndNameInput = ({navigation}) => {
         keyboardType="numeric"
         placeholder="Enter your age"
       />
-      <View>
-      <Button
-        title="Submit"
-        onPress={handleSubmit}
-        color="#841584"
-        style={{ width: '100%'}}
-      />
+      
+      <View style={{ width: "100%" }}>
+        <TouchableOpacity
+          style={{ 
+            backgroundColor: 'black', 
+            height: 40, 
+            borderRadius: 5, 
+            justifyContent: 'center', 
+            alignItems: 'center', 
+            marginBottom: 10, 
+            opacity: 0.8, 
+            width: '100%', 
+            
+
+          }}
+          onPress={() => {
+            console.log('Login');
+            navigation.navigate('Budget');
+          }}
+        >
+          <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>LOGIN</Text>
+        </TouchableOpacity>
       </View>
+    
     </View>
   );
 };
@@ -53,7 +69,7 @@ const AgeAndNameInput = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    
     alignItems: 'center',
     padding: 20,
     backgroundColor: '#fff',
@@ -70,6 +86,8 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 20,
     width: '100%',
+    fontSize: 20,
+    borderColor:"black",
     backgroundColor: '#f9f9f9', 
   },
 });
