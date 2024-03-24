@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import '../css/upload.css';
+// import '../css/upload.css';
 
 
 export default function NewUpload(props) {
@@ -197,8 +197,10 @@ export default function NewUpload(props) {
         onDrop={handleDrop}
         onDragLeave={handleDragLeave}
         onDragOver={handleDragOver}
+        // style={{height:'5vh'}}
       >
         <input
+        style={{height:'5vh', width:'20vw'}}
           placeholder="fileInput"
           className="hidden"
           ref={inputRef}
@@ -208,13 +210,13 @@ export default function NewUpload(props) {
           accept=".jpg"
         />
 
-        <p>
+        <p style={{margin:'25px', textDecoration:'none'}}>
           Drag & Drop files or{" "}
           <span
             className="font-bold text-blue-600 cursor-pointer"
             onClick={openFileExplorer}
           >
-            <u>Select files</u>
+            <u style={{textDecoration:'none', cursor:'pointer', color:'rgb(190, 71, 20)'}}>Select files</u>
           </span>{" "}
           to upload
         </p>
@@ -236,6 +238,7 @@ export default function NewUpload(props) {
         onClick={handleCaptureClick}
         disabled={isCapturing}
         className="bg-blue-500 text-white px-4 py-2 rounded mt-4"
+        style={{height:'5vh', width:'10vw', backgroundColor:'#353535', border:'none', color:'white', marginBottom:"10px"}}
       >
         Capture Image 
       </button>}
@@ -275,6 +278,7 @@ export default function NewUpload(props) {
           <div >
             
             <button
+            style={{backgroundColor:'#353535', color:'white', border:'none', height:'5vh', width:'13vw', margin:'10px', cursor:'pointer'}}
               id="capture"
               className="text-white px-4 py-2 rounded mt-4 text-xs"
               onClick={() => {handleUploadClick()}}
