@@ -5,17 +5,16 @@ import * as Location from 'expo-location'; // Import Expo Location
 import Navbar from './Navbar';
 
 const locations = [
-  { latitude: 21.1663, longitude: 72.8141 }, // Example destination
-  // Define additional close-by locations here
-  { latitude: 21.1700, longitude: 72.8150 },
-  { latitude: 21.1630, longitude: 72.8100 },
-  { latitude: 21.1680, longitude: 72.8120 },
-  { latitude: 21.1650, longitude: 72.8130 },
-  { latitude: 21.1670, longitude: 72.8140 },
-  { latitude: 21.1690, longitude: 72.8150 },
-  { latitude: 21.1640, longitude: 72.8110 },
-  { latitude: 21.1660, longitude: 72.8120 },
+  { latitude: 21.1505555, longitude: 72.831373 },
+  { latitude: 21.166096, longitude: 72.837839 },
+  { latitude: 21.1618574, longitude: 72.8209844 },
+  { latitude: 21.1862198, longitude: 72.8103599 },
+  { latitude: 21.1873286, longitude: 72.7787588 },
+  { latitude: 21.16195, longitude: 72.8206729 },
+  { latitude: 21.1672615, longitude: 72.8116913 },
+  { latitude: 21.1435839, longitude: 72.7854542 },
 ];
+
 
 export default class App extends Component {
   constructor(props) {
