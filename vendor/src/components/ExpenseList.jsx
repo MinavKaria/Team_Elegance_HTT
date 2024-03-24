@@ -7,7 +7,7 @@ export const ExpenseList = ({ expenses, handleEdit, handleDelete }) => {
       <ul style={{ listStyleType: 'none', padding: 0 }}>
         {expenses.map((expense) => (
           <li key={expense.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #ccc', padding: '10px 0' }}>
-            <div style={{ flex: 1 }}>
+            <div style={{ flex: 1, color:'white' }}>
               <span>{expense.charge}: </span>
               <span>Rs. {expense.amount}</span>
             </div>
@@ -22,11 +22,7 @@ export const ExpenseList = ({ expenses, handleEdit, handleDelete }) => {
           </li>
         ))}
       </ul>
-      {expenses.length > 0 && (
-        <button style={{ backgroundColor: '#ff6347', color: '#fff', border: 'none', padding: '5px 10px', borderRadius: '5px', cursor: 'pointer' }}>
-          clear expense <MdDelete style={{ fontSize: '20px', verticalAlign: 'middle' }} />
-        </button>
-      )}
+      {expenses.length > 0}
     </div>
   );
 };

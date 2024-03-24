@@ -1,7 +1,7 @@
 #root {
   max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  margin: 0;
+  padding: 0;
   text-align: center;
 }
 
@@ -42,9 +42,24 @@
 }
 
 body{
-  background-color: rgb(20, 20, 20);
+  background-color: rgb(190, 71, 20);
+  
 }
 
 #title-text{
   color: rgb(190, 71, 20);
 }
+
+#total-spending{
+  color: white;
+}
+
+.circle{
+  height: 100vh;
+  width: 99vw;
+  z-index: -10000000;
+  background-color: rgb(0, 0, 0);
+  border-radius: 20rem;
+}
+
+

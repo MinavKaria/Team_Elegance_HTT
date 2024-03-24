@@ -1,3 +1,33 @@
 .form-center{
     color: aliceblue;
 }
+
+.form-control{
+    height: 5vh;
+    width: 25vw;
+    margin-top: 10px;
+    border-radius: 7px;
+    margin-bottom: 10px;
+}
+
+.spanline{
+    width: 25vw;
+    border: solid;
+    border-bottom: 2.5px;
+    border-color: rgb(255, 255, 255);
+    background-color: #fff;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.formclass{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: c;
+}
+
+form .btn{
+    height: 5vh;
+    width: 16vw;
+}

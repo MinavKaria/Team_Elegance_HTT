@@ -5,6 +5,7 @@ import './App.css';
 import { Alert } from './components/Alert';
 import { ExpenseList } from './components/ExpenseList';
 import ExpressForms from './components/Expenseform';
+import Login from '../src/components/Login'
 
 
 const initialExpenses =localStorage.getItem('expenses')? JSON.parse(localStorage.getItem
@@ -112,6 +113,7 @@ function App() {
 
   return (
     <div className="App">
+    <div className="circle">
       {alert.show && <Alert type={alert.type} text= {alert.text} />}
      
       <h1 id='title-text'>ZORKO'S MENU</h1>
@@ -126,7 +128,7 @@ function App() {
         handleDelete={handleDelete}
         handleEdit={handleEdit}/>
       </main>
-      <h1>
+      <h1 id='total-spending'>
         TOTAL SPENDING: <span className='total'>
           ${expenses.reduce((acc,curr)=>{
             return (acc+= parseInt(curr.amount))
@@ -134,7 +136,8 @@ function App() {
         </span>
       </h1>
       
-      
+      <Login />
+    </div>
     </div>
   );
 }
