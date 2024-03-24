@@ -23,13 +23,17 @@ const Navbar = () => {
         <Image source={require('../assets/home_icon.png')} style={styles.icon} />
         <Text>Home</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.navItem} onPress={() => handleButtonPress('Locations')}>
+      <TouchableOpacity style={styles.navItem} onPress={() => handleButtonPress('LocationComponent')}>
         <Image source={require('../assets/search.png')} style={styles.icon} />
         <Text>Find nearest Store</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.navItem} onPress={() => handleButtonPress('Budget')}>
         <Image source={require('../assets/budget.png')} style={styles.icon} />
         <Text>Buy Budgetwise</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.navItem} onPress={() => handleButtonPress('Profile')}>
+        <Image source={require('../assets/profile.png')} style={styles.icon} />
+        <Text>Profile</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.navItem} onPress={() => handleButtonPress('Profile')}>
         <Image source={require('../assets/profile.png')} style={styles.icon} />

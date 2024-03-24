@@ -1,11 +1,11 @@
 import React, { memo, useCallback, useRef, useState } from "react";
 import {
-    Dimensions,
-    FlatList,
-    Image,
-    StyleSheet,
-    Text,
-    View,
+  Dimensions,
+  FlatList,
+  Image,
+  StyleSheet,
+  Text,
+  View,
 } from "react-native";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
@@ -51,14 +51,12 @@ const slideList = [
   {
     id: 1,
     image: require("../assets/loyalty.jpeg"),
-    title: "Offer 1",
-    subtitle: "Get this offer now!",
+    
   },
   {
     id: 2,
     image: require("../assets/loyalty2.jpeg"),
-    title: "Loyalty Membership",
-    subtitle: "Get the best deals with our loyalty program!",
+    
   },
   // Add more objects with your custom images
 ];
