@@ -26,11 +26,11 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    this.getLocation(); // Call getLocation when the component mounts
+    this.getLocation(); 
   }
 
   getLocation = async () => {
-    let { status } = await Location.requestForegroundPermissionsAsync(); // Request location permission
+    let { status } = await Location.requestForegroundPermissionsAsync();
     if (status !== 'granted') {
       console.log('Permission to access location was denied');
       return;
@@ -39,11 +39,11 @@ export default class App extends Component {
     let location = await Location.getCurrentPositionAsync({}); // Get current location
     this.setState({ myLocation: location.coords }, () => {
       this.calculateClosestLocations();
-    }); // Update myLocation state and calculate closest locations
+    }); 
   };
 
   calculateDistance = (location1, location2) => {
-    const R = 6371; // Radius of the Earth in kilometers
+    const R = 6371; 
     const lat1 = location1.latitude;
     const lon1 = location1.longitude;
     const lat2 = location2.latitude;

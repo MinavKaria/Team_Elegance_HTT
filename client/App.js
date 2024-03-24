@@ -19,6 +19,7 @@ export default function App() {
 
     <NavigationContainer>
     <Stack.Navigator>
+   
       <Stack.Screen name="Zorko"  options={{
             headerTitle: () => (
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -26,6 +27,7 @@ export default function App() {
               </View>
               
               ),}} component={Landing} />
+
          <Stack.Screen 
           name="Budget" 
           component={Budget} 
@@ -68,11 +70,7 @@ export default function App() {
           component={Profile}
           options={{ title: 'Profile' }}
         />
-        <Stack.Screen
-          name="SocialMedia"
-          component={SocialMedia}
-          options={{ title: 'Profile' }}
-        />
+        
         <Stack.Screen
           name="Cart"
           component={Cart}
@@ -87,6 +85,11 @@ export default function App() {
           name="Carousel"
           component={Carousel}
           options={{ title: 'Cashbacks' }}
+        />
+         <Stack.Screen
+          name="SocialMedia"
+          component={SocialMedia}
+          options={{ title: 'Profile' }}
         />
 
      
