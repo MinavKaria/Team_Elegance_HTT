@@ -14,7 +14,7 @@ const Navbar = () => {
   const navigation = useNavigation(); // Use useNavigation hook to get navigation object
 
   const handleButtonPress = (screenName) => {
-    navigation.navigate(screenName,{budget: Number.MAX_SAFE_INTEGER}); // Navigate to the specified screen
+    navigation.navigate(screenName,{budget:"10000"}); // Navigate to the specified screen
   };
 
   return (
@@ -35,6 +35,7 @@ const Navbar = () => {
         <Image source={require('../assets/profile.png')} style={styles.icon} />
         <Text>Profile</Text>
       </TouchableOpacity>
+
     </View>
   );
 };

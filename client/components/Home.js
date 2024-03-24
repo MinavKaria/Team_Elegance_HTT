@@ -6,15 +6,13 @@ import Navbar from './Navbar';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Carousel from './Cashbacks';
 
-const FoodMenuPage = ({ navigation,route }) => {
-
-  const { budget } = route.params 
+const FoodMenuPage = ({ navigation, route }) => {
+  const { budget } = route.params;
   const [menuData, setMenuData] = useState([]);
   const [cartItems, setCartItems] = useState({});
   const [addedItem, setAddedItem] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  console.log(budget);
 
   useEffect(() => {
     fetchMenuData();
@@ -24,7 +22,6 @@ const FoodMenuPage = ({ navigation,route }) => {
     try {
       setLoading(true);
       const response = await axios.get('https://team-elegance-htt-e3iv.vercel.app/getAdmin');
-      console.log('Menu data:', response.data);
       setMenuData(response.data);
     } catch (error) {
       console.error('Error fetching menu data:', error);
@@ -48,50 +45,74 @@ const FoodMenuPage = ({ navigation,route }) => {
       setCartItems(updatedCart);
     }
   };
-  
+
+  const handleUpvote = (foodItemId) => {
+    // Implement logic to increment upvote count for food item with the given ID
+  };
+
+  const handleDownvote = (foodItemId) => {
+    // Implement logic to increment downvote count for food item with the given ID
+  };
+
+  const handleComment = (foodItemId, comment) => {
+    // Implement logic to add a comment for the food item with the given ID
+  };
 
   return (
     <SafeAreaView style={styles.container}>
-      
       <ScrollView>
-      <Carousel/>
+        <Carousel />
         <Text style={styles.sectionTitle}>Menu</Text>
         {loading ? (
           <Text>Loading...</Text>
         ) : error ? (
           <Text>{error}</Text>
         ) : (
-          Array.isArray(menuData) && menuData.map((menuItem) => (
-  menuItem.foodMenu.map((foodItem) => {
-    if (foodItem.price <= (budget)) {
-      console.log('Food item:', foodItem.price <= (budget));
-      return (
-        <View key={foodItem._id} style={styles.itemContainer}>
-          <Image source={require('../assets/advertisement.jpg')} style={styles.itemImage} resizeMode="cover" />
-          <View style={styles.itemDetails}>
-            <Text style={styles.itemName}>{foodItem.foodName}</Text>
-            <Text style={styles.itemPrice}>	₹ {foodItem.price}</Text>
-          </View>
-          <View style={styles.quantityContainer}>
-            <TouchableOpacity style={styles.quantityButton} onPress={() => removeFromCart(foodItem)}>
-              <Text style={styles.quantityButtonText}>-</Text>
-            </TouchableOpacity>
-            <Text style={styles.quantity}>{cartItems[foodItem._id] || 0}</Text>
-            <TouchableOpacity style={styles.quantityButton} onPress={() => addToCart(foodItem)}>
-              <Text style={styles.quantityButtonText}>+</Text>
-            </TouchableOpacity>
-          </View>
-          {addedItem && addedItem._id === foodItem._id && (
-            <FontAwesome5 name="check-circle" size={24} color="green" />
-          )}
-        </View>
-      );
-    } else {
-      return null; // Exclude items exceeding budget
-    }
-  })
-))
+          Array.isArray(menuData) &&
+          menuData.map((menuItem) =>
+            menuItem.foodMenu.map((foodItem) => {
+              if (foodItem.price <= budget) {
+                return (
+                  <View key={foodItem._id} style={styles.itemContainer}>
+                    <Image source={require('../assets/advertisement.jpg')} style={styles.itemImage} resizeMode="cover" />
+                    <View style={styles.itemDetails}>
+                      <Text style={styles.itemName}>{foodItem.foodName}</Text>
+                      <Text style={styles.itemPrice}>₹ {foodItem.price}</Text>
+                      <View style={styles.interactionContainer}>
+                      <TouchableOpacity onPress={() => handleUpvote(foodItem._id)}>
+                        <FontAwesome5 name={foodItem.upvoted ? "thumbs-up" : "thumbs-up"} size={20} color={foodItem.upvoted ? "green" : "gray"} />
+                      </TouchableOpacity>
+                      <Text>{foodItem.upVotes || 0}</Text>
+                      <TouchableOpacity onPress={() => handleDownvote(foodItem._id)}>
+                        <FontAwesome5 name={foodItem.downvoted ? "thumbs-down" : "thumbs-down"} size={20} color={foodItem.downvoted ? "red" : "gray"} />
+                      </TouchableOpacity>
+                      <Text>{foodItem.downVotes || 0}</Text>
 
+                        <TouchableOpacity onPress={() => handleComment(foodItem._id, 'Your comment')}>
+                          <FontAwesome5 name="comment" size={20} color="blue" />
+                        </TouchableOpacity>
+                        <Text>{foodItem.comments ? foodItem.comments.length : 0}</Text>
+                      </View>
+                    </View>
+                    <View style={styles.quantityContainer}>
+                      <TouchableOpacity style={styles.quantityButton} onPress={() => removeFromCart(foodItem)}>
+                        <Text style={styles.quantityButtonText}>-</Text>
+                      </TouchableOpacity>
+                      <Text style={styles.quantity}>{cartItems[foodItem._id] || 0}</Text>
+                      <TouchableOpacity style={styles.quantityButton} onPress={() => addToCart(foodItem)}>
+                        <Text style={styles.quantityButtonText}>+</Text>
+                      </TouchableOpacity>
+                    </View>
+                    {addedItem && addedItem._id === foodItem._id && (
+                      <FontAwesome5 name="check-circle" size={24} color="green" />
+                    )}
+                  </View>
+                );
+              } else {
+                return null; // Exclude items exceeding budget
+              }
+            })
+          )
         )}
       </ScrollView>
       <View style={styles.navbar}>
@@ -161,8 +182,13 @@ const styles = StyleSheet.create({
     position: 'relative',
     bottom: 0,
     width: '100%',
-    left:'5.5%',
-    },
+  },
+  interactionContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 5,
+    gap: 10,
+  },
 });
 
 export default FoodMenuPage;
