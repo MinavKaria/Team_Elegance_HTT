@@ -12,7 +12,7 @@ import QuestionPage1 from './components/QuestionPage1';
 import SocialMedia from './components/SocialMedia';
 import VerifyOTP from './components/VerifyOTP';
 import LocationComponent from './components/Location';
-
+import Carousel from './components/Cashbacks';
 const Stack = createStackNavigator();
 export default function App() {
   return (
@@ -81,8 +81,14 @@ export default function App() {
         <Stack.Screen
           name="LocationComponent"
           component={LocationComponent}
-          options={{ title: 'Location' }}
+          options={{ title: 'Closest Zorko Store near you' }}
         />
+        <Stack.Screen
+          name="Carousel"
+          component={Carousel}
+          options={{ title: 'Cashbacks' }}
+        />
+
      
     </Stack.Navigator>
   </NavigationContainer>

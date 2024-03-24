@@ -9,22 +9,29 @@ import {
 } from "react-native";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
+const carouselWidth = windowWidth * 0.8;
+const carouselHeight = windowHeight * 0.6;
 
 const styles = StyleSheet.create({
-  slide: {
-    height: windowHeight,
-    width: windowWidth,
+  container: {
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
   },
-  slideImage: { width: windowWidth * 0.9, height: windowHeight * 0.7 },
-  slideTitle: { fontSize: 24 },
-  slideSubtitle: { fontSize: 18 },
+  slide: {
+    height: carouselHeight,
+    width: carouselWidth,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  slideImage: { width: carouselWidth * 0.9, height: carouselHeight * 0.7 },
+  slideTitle: { fontSize: 18 },
+  slideSubtitle: { fontSize: 14 },
 
   pagination: {
     position: "absolute",
     bottom: 8,
-    width: "100%",
+    width: carouselWidth,
     justifyContent: "center",
     flexDirection: "row",
   },
@@ -37,22 +44,29 @@ const styles = StyleSheet.create({
   paginationDotActive: { backgroundColor: "lightblue" },
   paginationDotInactive: { backgroundColor: "gray" },
 
-  carousel: { flex: 1 },
+  carousel: { width: carouselWidth },
 });
 
-const slideList = Array.from({ length: 30 }).map((_, i) => {
-  return {
-    id: i,
-    image: `https://picsum.photos/1440/2842?random=${i}`,
-    title: `This is the title ${i + 1}!`,
-    subtitle: `This is the subtitle ${i + 1}!`,
-  };
-});
+const slideList = [
+  {
+    id: 1,
+    image: require("../assets/loyalty.jpeg"),
+    title: "Title 1",
+    subtitle: "Subtitle 1",
+  },
+  {
+    id: 2,
+    image: require("../assets/loyalty2.jpeg"),
+    title: "Title 2",
+    subtitle: "Subtitle 2",
+  },
+  // Add more objects with your custom images
+];
 
 const Slide = memo(function Slide({ data }) {
   return (
     <View style={styles.slide}>
-      <Image source={{ uri: data.image }} style={styles.slideImage}></Image>
+      <Image source={data.image} style={styles.slideImage}></Image>
       <Text style={styles.slideTitle}>{data.title}</Text>
       <Text style={styles.slideSubtitle}>{data.subtitle}</Text>
     </View>
@@ -84,7 +98,7 @@ export default function Carousel() {
   const indexRef = useRef(index);
   indexRef.current = index;
   const onScroll = useCallback((event) => {
-    const slideSize = event.nativeEvent.layoutMeasurement.width;
+    const slideSize = carouselWidth;
     const index = event.nativeEvent.contentOffset.x / slideSize;
     const roundIndex = Math.round(index);
 
@@ -110,8 +124,8 @@ export default function Carousel() {
     getItemLayout: useCallback(
       (_, index) => ({
         index,
-        length: windowWidth,
-        offset: index * windowWidth,
+        length: carouselWidth,
+        offset: index * carouselWidth,
       }),
       []
     ),
@@ -122,19 +136,19 @@ export default function Carousel() {
   }, []);
 
   return (
-    <>
+    <View style={styles.container}>
       <FlatList
         data={slideList}
         style={styles.carousel}
         renderItem={renderItem}
         pagingEnabled
-        horizontal
+        horizontal={true}
         showsHorizontalScrollIndicator={false}
         bounces={false}
         onScroll={onScroll}
         {...flatListOptimizationProps}
       />
       <Pagination index={index}></Pagination>
-    </>
+    </View>
   );
 }
