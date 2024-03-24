@@ -69,9 +69,9 @@ function Login({ navigation }) {
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            // sendOTP();
+            sendOTP();
             console.log("Send OTP");
-            navigation.navigate("QuestionPage1");
+           
           }}
         >
           <Text style={styles.buttonText}>SEND OTP</Text>

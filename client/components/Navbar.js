@@ -14,7 +14,7 @@ const Navbar = () => {
   const navigation = useNavigation(); // Use useNavigation hook to get navigation object
 
   const handleButtonPress = (screenName) => {
-    navigation.navigate(screenName); // Navigate to the specified screen
+    navigation.navigate(screenName,{budget:"10000"}); // Navigate to the specified screen
   };
 
   return (

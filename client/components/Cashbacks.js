@@ -51,14 +51,14 @@ const slideList = [
   {
     id: 1,
     image: require("../assets/loyalty.jpeg"),
-    title: "Title 1",
-    subtitle: "Subtitle 1",
+    title: "Offer 1",
+    subtitle: "Get this offer now!",
   },
   {
     id: 2,
     image: require("../assets/loyalty2.jpeg"),
-    title: "Title 2",
-    subtitle: "Subtitle 2",
+    title: "Loyalty Membership",
+    subtitle: "Get the best deals with our loyalty program!",
   },
   // Add more objects with your custom images
 ];
