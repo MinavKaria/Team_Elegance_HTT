@@ -1,100 +1,111 @@
-import { FontAwesome5 } from '@expo/vector-icons'; // Import the icon component
-import React, { useState } from 'react';
-import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import Cashbacks from './Cashbacks';
+import React, { useState, useEffect } from 'react';
+import { ScrollView, Image, StyleSheet, Text, TouchableOpacity, View, SafeAreaView } from 'react-native';
+import { FontAwesome5 } from '@expo/vector-icons';
+import axios from 'axios';
 import Navbar from './Navbar';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const menuData = [
-  { id: 1, foodName: 'Pizza', price: '$10', image: require('../assets/advertisement.jpg') },
-  { id: 2, foodName: 'Burger', price: '$8', image: require('../assets/advertisement.jpg') },
-  { id: 3, foodName: 'Salad', price: '$6', image: require('../assets/advertisement.jpg') },
-  // Add more items as needed
-];
+const FoodMenuPage = ({ navigation,route }) => {
 
-const FoodMenuPage = ({ navigation }) => {
+  const { budget } = route.params;
+  const [menuData, setMenuData] = useState([]);
   const [cartItems, setCartItems] = useState({});
-  const [addedItem, setAddedItem] = useState(null); // State to store the added item
+  const [addedItem, setAddedItem] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  console.log(budget);
+
+  useEffect(() => {
+    fetchMenuData();
+  }, []);
+
+  const fetchMenuData = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get('https://team-elegance-htt-e3iv.vercel.app/getAdmin');
+      console.log('Menu data:', response.data);
+      setMenuData(response.data);
+    } catch (error) {
+      console.error('Error fetching menu data:', error);
+      setError('Error fetching menu data. Please check your network connection.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const addToCart = (item) => {
     const updatedCart = { ...cartItems };
-    updatedCart[item.id] = (updatedCart[item.id] || 0) + 1;
+    updatedCart[item._id] = (updatedCart[item._id] || 0) + 1;
     setCartItems(updatedCart);
-    setAddedItem(item); // Update the addedItem state
-    console.log(cartItems);
+    setAddedItem(item);
   };
 
   const removeFromCart = (item) => {
     const updatedCart = { ...cartItems };
-    if (updatedCart[item.id] > 0) {
-      updatedCart[item.id] -= 1;
+    if (updatedCart[item._id] > 0) {
+      updatedCart[item._id] -= 1;
       setCartItems(updatedCart);
-      console.log(cartItems);
     }
   };
 
-  const renderItem = ({ item }) => (
-    <View style={styles.itemContainer}>
-      <Image source={item.image} style={styles.itemImage} resizeMode="cover" />
-      <View style={styles.itemDetails}>
-        <Text style={styles.itemName}>{item.foodName}</Text>
-        <Text style={styles.itemPrice}>{item.price}</Text>
-      </View>
-      <View style={styles.quantityContainer}>
-        <TouchableOpacity style={styles.quantityButton} onPress={() => removeFromCart(item)}>
-          <Text style={styles.quantityButtonText}>-</Text>
-        </TouchableOpacity>
-        <Text style={styles.quantity}>{cartItems[item.id] || 0}</Text>
-        <TouchableOpacity style={styles.quantityButton} onPress={() => addToCart(item)}>
-          <Text style={styles.quantityButtonText}>+</Text>
-        </TouchableOpacity>
-      </View>
-      <Text>
-      {addedItem && addedItem.id === item.id && <FontAwesome5 name="check-circle" size={24} color="green" />} {/* Display check icon for added item */}
-      
-        </Text>
-    </View>
-  );
-
   return (
+    <SafeAreaView style={styles.container}>
+      <ScrollView>
+        <Text style={styles.sectionTitle}>Menu</Text>
+        {loading ? (
+          <Text>Loading...</Text>
+        ) : error ? (
+          <Text>{error}</Text>
+        ) : (
+          Array.isArray(menuData) && menuData.map((menuItem) => (
+  menuItem.foodMenu.map((foodItem) => {
+    if (foodItem.price <= (budget)) {
+      console.log('Food item:', foodItem.price <= (budget));
+      return (
+        <View key={foodItem._id} style={styles.itemContainer}>
+          <Image source={require('../assets/advertisement.jpg')} style={styles.itemImage} resizeMode="cover" />
+          <View style={styles.itemDetails}>
+            <Text style={styles.itemName}>{foodItem.foodName}</Text>
+            <Text style={styles.itemPrice}>	₹ {foodItem.price}</Text>
+          </View>
+          <View style={styles.quantityContainer}>
+            <TouchableOpacity style={styles.quantityButton} onPress={() => removeFromCart(foodItem)}>
+              <Text style={styles.quantityButtonText}>-</Text>
+            </TouchableOpacity>
+            <Text style={styles.quantity}>{cartItems[foodItem._id] || 0}</Text>
+            <TouchableOpacity style={styles.quantityButton} onPress={() => addToCart(foodItem)}>
+              <Text style={styles.quantityButtonText}>+</Text>
+            </TouchableOpacity>
+          </View>
+          {addedItem && addedItem._id === foodItem._id && (
+            <FontAwesome5 name="check-circle" size={24} color="green" />
+          )}
+        </View>
+      );
+    } else {
+      return null; // Exclude items exceeding budget
+    }
+  })
+))
 
-
-    <View style={styles.container}>
-    <Cashbacks/>
-      <Text style={styles.sectionTitle}>Menu</Text>
-      <FlatList
-        data={menuData}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id.toString()}
-      />
-     
-        <View style={{position: 'absolute', bottom: 150, width: "100%", alignSelf:"center", height:40}}>
-      {/* Display cart items if cartItems is not null */}
-     
-
-      {/* TouchableOpacity to go to cart */}
-      {cartItems && (
-        <TouchableOpacity style={{backgroundColor:'black', width: "100%", alignSelf:"center",justifyContent:'center',alignContent:'center', alignItems:'center',height:'100%', borderRadius: 10}} onPress={() => {
-            console.log('Login');
-            navigation.navigate('Cart');
-          }} >
-          <Text style={{color:'white'}}>GO TO CART</Text>
-        </TouchableOpacity>
-      )}
-    </View>
-      <Navbar />
-    </View>
+        )}
+      </ScrollView>
+      <View style={styles.navbar}>
+        <Navbar />
+      </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
   },
   sectionTitle: {
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 10,
+    paddingHorizontal: 20,
   },
   itemContainer: {
     flexDirection: 'row',
@@ -105,7 +116,8 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     borderRadius: 5,
     padding: 10,
-    position: 'relative'
+    position: 'relative',
+    paddingHorizontal: 20,
   },
   itemImage: {
     width: 80,
@@ -140,6 +152,11 @@ const styles = StyleSheet.create({
   quantity: {
     marginHorizontal: 10,
     fontSize: 18,
+  },
+  navbar: {
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
   },
 });
 

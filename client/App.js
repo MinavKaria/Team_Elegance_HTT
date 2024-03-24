@@ -81,7 +81,7 @@ export default function App() {
         <Stack.Screen
           name="LocationComponent"
           component={LocationComponent}
-          options={{ title: 'Location' }}
+          options={{ title: 'Closest Zorko Store near you' }}
         />
      
     </Stack.Navigator>

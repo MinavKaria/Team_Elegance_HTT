@@ -23,7 +23,7 @@ const Navbar = () => {
         <Image source={require('../assets/home_icon.png')} style={styles.icon} />
         <Text>Home</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.navItem} onPress={() => handleButtonPress('Maps')}>
+      <TouchableOpacity style={styles.navItem} onPress={() => handleButtonPress('Locations')}>
         <Image source={require('../assets/search.png')} style={styles.icon} />
         <Text>Find nearest Store</Text>
       </TouchableOpacity>

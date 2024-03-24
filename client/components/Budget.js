@@ -98,7 +98,7 @@ const ZorkoPage = ({ navigation }) => {
             AsyncStorage.setItem('partyFood', partyFood.toString());
             AsyncStorage.setItem('partyPeople', partyPeople);
             AsyncStorage.setItem('partyFoodBudget', partyFoodBudget);
-            navigation.navigate('LocationComponent'); 
+            navigation.navigate('Home',{budget: parseInt(budget), partyFood: partyFood, partyPeople: partyPeople, partyFoodBudget: partyFoodBudget}); 
           }}
         >
           <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>SUBMIT</Text>
