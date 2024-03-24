@@ -5,7 +5,7 @@ export const ExpenseItem = ({expense, handleEdit, handleDelete}) => {
   
     return (
     <li className='item'>
-      <div className='info'>
+      <div className='info' style={{color: 'purple'}}>
         <span className='expense'>{charge}: </span>
         <span className='amount'>    Rs.{amount}</span>
       </div>
