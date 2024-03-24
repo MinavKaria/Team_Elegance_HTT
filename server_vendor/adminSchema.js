@@ -10,7 +10,9 @@ const adminSchema = new mongoose.Schema({
     foodMenu:[{
         foodName:String,
         quantity:Number,
-        price:Number
+        price:Number,
+        likes:Number,
+        dislikes:Number,
     }],
     DateOfJoining:Date,
     phone:Number,
