@@ -35,10 +35,7 @@ const Navbar = () => {
         <Image source={require('../assets/profile.png')} style={styles.icon} />
         <Text>Profile</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.navItem} onPress={() => handleButtonPress('Profile')}>
-        <Image source={require('../assets/profile.png')} style={styles.icon} />
-        <Text>Profile</Text>
-      </TouchableOpacity>
+
     </View>
   );
 };
