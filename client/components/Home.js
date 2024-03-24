@@ -1,11 +1,10 @@
+import React, { useState, useEffect } from 'react';
+import { ScrollView, Image, StyleSheet, Text, TouchableOpacity, View, SafeAreaView } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
 import axios from 'axios';
-import { default as React, useEffect, useState } from 'react';
-import { FlatList, Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import Cashbacks from './Cashbacks';
-
-import Carousel from './Cashbacks';
 import Navbar from './Navbar';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import Carousel from './Cashbacks';
 
 const FoodMenuPage = ({ navigation, route }) => {
   const { budget } = route.params;
@@ -32,20 +31,12 @@ const FoodMenuPage = ({ navigation, route }) => {
     }
   };
 
-
-
-
-
-const FoodMenuPage = ({ navigation }) => {
-   
   const addToCart = (item) => {
     const updatedCart = { ...cartItems };
     updatedCart[item._id] = (updatedCart[item._id] || 0) + 1;
     setCartItems(updatedCart);
     setAddedItem(item);
-    cartItems.local
   };
-  // console.log(cartItems)
 
   const removeFromCart = (item) => {
     const updatedCart = { ...cartItems };
@@ -128,64 +119,6 @@ const FoodMenuPage = ({ navigation }) => {
         <Navbar />
       </View>
     </SafeAreaView>
-  )
-
-  };
-
-  const renderItem = ({ item }) => (
-    <View style={styles.itemContainer}>
-      <Image source={item.image} style={styles.itemImage} resizeMode="cover" />
-      <View style={styles.itemDetails}>
-        <Text style={styles.itemName}>{item.foodName}</Text>
-        <Text style={styles.itemPrice}>{item.price}</Text>
-      </View>
-      <View style={styles.quantityContainer}>
-        <TouchableOpacity style={styles.quantityButton} onPress={() => removeFromCart(item)}>
-          <Text style={styles.quantityButtonText}>-</Text>
-        </TouchableOpacity>
-        <Text style={styles.quantity}>{cartItems[item.id] || 0}</Text>
-        <TouchableOpacity style={styles.quantityButton} onPress={() => addToCart(item)}>
-          <Text style={styles.quantityButtonText}>+</Text>
-        </TouchableOpacity>
-      </View>
-      {cartItems[item.id] > 0 && <FontAwesome5 name="check-circle" size={24} color="green" />}
-    </View>
-  );
-
-  return (
-    <View style={styles.container}>
-      <Cashbacks />
-      <Text style={styles.sectionTitle}>Menu</Text>
-      <FlatList
-        data={menuData}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id.toString()}
-      />
-      {cartItems && (
-        <View style={{position: 'absolute'}}>
-          
-          <Text>{JSON.stringify(cartItems)}</Text>
-        </View>
-      )}
-      <View style={styles.cartButtonContainer}>
-        <TouchableOpacity
-          style={styles.cartButton}
-          onPress={() => {console.log({cartItems}) 
-          navigation.navigate('Cart', { cartItems }
-          
-          )
-          }
-        
-          }
-
-          
-
-        >
-          <Text style={styles.cartButtonText}>GO TO CART</Text>
-        </TouchableOpacity>
-      </View>
-      <Navbar />
-    </View>
   );
 };
 
@@ -210,7 +143,6 @@ const styles = StyleSheet.create({
     padding: 10,
     position: 'relative',
     paddingHorizontal: 20,
-    position: 'relative',
   },
   itemImage: {
     width: 80,

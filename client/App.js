@@ -3,16 +3,16 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { Text, View } from 'react-native';
 import Budget from './components/Budget';
 import Cart from './components/Cart';
-import Carousel from './components/Cashbacks';
 import Home from './components/Home';
 import Landing from './components/Landing';
-import LocationComponent from './components/Location';
 import Login from './components/Login';
 import Maps from './components/Maps';
 import Profile from './components/Profile';
 import QuestionPage1 from './components/QuestionPage1';
 import SocialMedia from './components/SocialMedia';
 import VerifyOTP from './components/VerifyOTP';
+import LocationComponent from './components/Location';
+import Carousel from './components/Cashbacks';
 const Stack = createStackNavigator();
 export default function App() {
   return (
@@ -57,7 +57,6 @@ export default function App() {
           name="Home"
           component={Home}
           options={{ title: 'Home' }}
-          
         />
         <Stack.Screen
           name="Maps"
@@ -78,7 +77,6 @@ export default function App() {
           name="Cart"
           component={Cart}
           options={{ title: 'Cart' }}
-          
         />
         <Stack.Screen
           name="LocationComponent"

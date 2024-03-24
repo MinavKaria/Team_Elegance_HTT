@@ -2,24 +2,23 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 const Cart = ({ cartItems }) => {
-  const selectedItems = Object.keys(cartItems ?? {}).filter((itemId) => cartItems[itemId] > 0);
-  console.log({cartItems})
-  if (!selectedItems || selectedItems.length === 0) {
-    return <View style={styles.container}><Text>No items in cart</Text></View>;
-  }
-
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Cart</Text>
-      {selectedItems.map((itemId) => (
-        <View key={itemId} style={styles.item}>
-          <Text style={styles.itemName}>Item: {cartItems[itemId].foodName}</Text>
-          <Text style={styles.itemQuantity}>Quantity: {cartItems[itemId]}</Text>
-        </View>
-      ))}
-    </View>
-  );
-};
+    if (!cartItems) {
+      return <View style={{flex:1, justifyContent:'center' , alignItems: 'center', fontWeight: 'bold'}}><Text>No items in cart</Text></View>;
+    }
+  
+    return (
+      <View style={styles.container}>
+        <Text style={styles.title}>Cart</Text>
+        {Object.keys(cartItems).map((itemId) => (
+          <View key={itemId} style={styles.item}>
+            <Text style={styles.itemName}>Item: {cartItems[itemId].name}</Text>
+            <Text style={styles.itemQuantity}>Quantity: {cartItems[itemId].quantity}</Text>
+          </View>
+        ))}
+      </View>
+    );
+  };
+  
 
 const styles = StyleSheet.create({
   container: {
